@@ -1,0 +1,22 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://cm7qo2dxea7cn"]
+
+[ext_resource type="FontFile" uid="uid://byqltgdhqes1t" path="res://Fonts/3x3-Mono.ttf" id="1_gk8t6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8nvkp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_opjjv"]
+bg_color = Color(0.239216, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1pwfk"]
+bg_color = Color(0.290196, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_frhv4"]
+bg_color = Color(1, 0.384314, 0, 1)
+
+[resource]
+Button/font_sizes/font_size = 4
+Button/fonts/font = ExtResource("1_gk8t6")
+Button/styles/focus = SubResource("StyleBoxEmpty_8nvkp")
+Button/styles/hover = SubResource("StyleBoxFlat_opjjv")
+Button/styles/normal = SubResource("StyleBoxFlat_1pwfk")
+Button/styles/pressed = SubResource("StyleBoxFlat_frhv4")

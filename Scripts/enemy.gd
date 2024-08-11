@@ -52,4 +52,10 @@ func minus_hp(dmg):
 
 func _on_area_3d_body_entered(body):
 	if body.is_in_group("player"):
+		%Anim.play("atk")
 		body.minus_health(1)
+
+
+func _on_area_3d_body_exited(body):
+	if body.is_in_group("player"):
+		%Anim.play("walk")

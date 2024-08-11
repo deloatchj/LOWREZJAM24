@@ -1,7 +1,7 @@
 extends Node
 
 @onready var player = get_tree().get_first_node_in_group("player")
-@onready var deathscreen = player.get_node("CanvasLayer/Death")
+var deathscreen
 var player_hp = 8
 var keys = []
 
@@ -26,24 +26,22 @@ func _process(_delta):
 		change_scene("res://Scenes/Pinnacle.tscn")
 
 func change_scene(scene):
-	keys.clear()
+	if not keys.is_empty():
+		keys.clear()
 	if scene is PackedScene:
 			get_tree().change_scene_to_packed(scene)
+			player = get_tree().get_first_node_in_group("player")
 	elif scene is String:
 			get_tree().change_scene_to_file(scene)
-	player = get_tree().get_first_node_in_group("player")
+			player = get_tree().get_first_node_in_group("player")
 
 func _physics_process(delta):
+	if player != null:
+		deathscreen = player.get_node("CanvasLayer/Death")
 	if player_hp > 8:
 		player_hp = 8
 	if player_hp < 1:
 		die()
-	if keys.size() == 1 and player != null:
-		player.get_node("CanvasLayer/Control/Key1").visible = true
-		player.get_node("CanvasLayer/Control/Key1").modulate = Color.RED
-	if keys.size() == 2 and player != null:
-		player.get_node("CanvasLayer/Control/Key2").visible = true
-		player.get_node("CanvasLayer/Control/Key2").modulate = Color.YELLOW
 
 func die():
 	player_hp = 0
@@ -52,4 +50,10 @@ func die():
 
 func set_death_screen_visibility(value):
 	if player != null:
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		player.get_node("CanvasLayer/Death").visible = value
+
+func retry():
+	get_tree().reload_current_scene()
+	player_hp = 8
+	get_tree().paused = false

@@ -31,14 +31,12 @@ func _physics_process(_delta):
 		if distance_to_player <= 2.0:
 			#need to add anims here
 			player.minus_health(attack_damage)
-		elif distance_to_player > 15.0:
-			if randf() > push_probability and randf() < scream_probability:
-				#need to set scream billboard visible true here
-				#scream sound
+		elif distance_to_player < 15.0:
+			if randf() > push_probability:
 				scream()
+			else:
+				push_player()
 
-		if randf() < push_probability:
-			push_player()
 
 func _on_spawn_timer_timeout():
 		var orc1 = orc_scene.instantiate()
@@ -58,7 +56,6 @@ func _on_attack_area_body_exited(body):
 
 func push_player():
 	if player:
-		player.minus_health(push_damage)
 		var direction = (player.global_transform.origin - global_transform.origin).normalized()
 		player.velocity += direction * 500 
 
@@ -69,9 +66,8 @@ func take_damage(damage):
 
 func scream():
 	%Anim.modulate = stun_color
-	player.set_process(false)
-	player.set_physics_process(false)
-	Game.player_hp -= 2
+	player.speed = 3
+	player.sprint_speed = 7
 	await get_tree().create_timer(2).timeout
-	player.set_process(true)
-	player.set_physics_process(true)
+	player.speed = 5
+	player.sprint_speed = 10
