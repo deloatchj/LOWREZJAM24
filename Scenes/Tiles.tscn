@@ -1,0 +1,189 @@
+[gd_scene load_steps=30 format=3 uid="uid://b2aklbowme2ul"]
+
+[ext_resource type="Material" uid="uid://cf8gtq30bg7dx" path="res://Textures/wallold.tres" id="1_xnvpp"]
+[ext_resource type="Texture2D" uid="uid://d21mbee2vjx6a" path="res://Textures/TECH_3B.PNG" id="2_8lcjb"]
+[ext_resource type="Texture2D" uid="uid://yfqsv1pnv6w5" path="res://Textures/TILE_1A.PNG" id="2_tely4"]
+[ext_resource type="Texture2D" uid="uid://7sy8p7nkq78n" path="res://Textures/TECH_2F.PNG" id="3_cw0jd"]
+[ext_resource type="Texture2D" uid="uid://daxiff8mwlkq2" path="res://Textures/TECH_4E.PNG" id="4_7t3yt"]
+[ext_resource type="Texture2D" uid="uid://cycxqpufcaaox" path="res://Textures/TILE_2C.PNG" id="6_g2ka6"]
+[ext_resource type="Texture2D" uid="uid://4nb0k7yhgro1" path="res://Textures/SLIME_1A.PNG" id="7_6jkde"]
+[ext_resource type="Texture2D" uid="uid://ca2y47coytqe8" path="res://Textures/FLOOR_1A.PNG" id="8_tmshi"]
+[ext_resource type="Script" path="res://Scripts/Sludge.gd" id="9_xh7sr"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_cj31x"]
+material = ExtResource("1_xnvpp")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3hs6l"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tdiws"]
+shading_mode = 0
+albedo_texture = ExtResource("2_8lcjb")
+uv1_offset = Vector3(0.5, -0.5, 0.5)
+uv1_triplanar = true
+texture_filter = 0
+grow = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_4t3m6"]
+material = SubResource("StandardMaterial3D_tdiws")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u5k0w"]
+shading_mode = 0
+albedo_texture = ExtResource("3_cw0jd")
+uv1_offset = Vector3(0.5, -0.5, 0.5)
+uv1_triplanar = true
+texture_filter = 0
+grow = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_3xn5t"]
+material = SubResource("StandardMaterial3D_u5k0w")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vjkkb"]
+shading_mode = 0
+albedo_texture = ExtResource("4_7t3yt")
+uv1_offset = Vector3(0.5, -0.5, 0.5)
+uv1_triplanar = true
+texture_filter = 0
+grow = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_j52e7"]
+material = SubResource("StandardMaterial3D_vjkkb")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7qnck"]
+cull_mode = 2
+shading_mode = 0
+albedo_texture = ExtResource("2_tely4")
+texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_nb5yj"]
+material = SubResource("StandardMaterial3D_7qnck")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xa6l5"]
+size = Vector3(2, 0.27215, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_16jur"]
+shading_mode = 0
+albedo_texture = ExtResource("7_6jkde")
+heightmap_enabled = true
+heightmap_scale = 16.0
+texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_a354j"]
+material = SubResource("StandardMaterial3D_16jur")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_suuuj"]
+cull_mode = 2
+shading_mode = 0
+albedo_texture = ExtResource("6_g2ka6")
+texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_6l1qy"]
+material = SubResource("StandardMaterial3D_suuuj")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bifuy"]
+cull_mode = 2
+shading_mode = 0
+albedo_texture = ExtResource("8_tmshi")
+texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_dsg8s"]
+material = SubResource("StandardMaterial3D_bifuy")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pv7wf"]
+shading_mode = 0
+albedo_texture = ExtResource("6_g2ka6")
+uv1_scale = Vector3(2, 2, 2)
+texture_filter = 0
+
+[sub_resource type="PrismMesh" id="PrismMesh_e3n56"]
+material = SubResource("StandardMaterial3D_pv7wf")
+left_to_right = 1.0
+size = Vector3(2, 2, 2)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_yxofm"]
+points = PackedVector3Array(1, 1.1, -1, 1, 1.1, 1, -1, -1, 1, -1, -1, -1, 1, -1, -1, 1, -1, 1)
+
+[node name="World" type="Node3D"]
+
+[node name="Wall-Old" type="MeshInstance3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+mesh = SubResource("BoxMesh_cj31x")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Wall-Old"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall-Old/StaticBody3D"]
+shape = SubResource("BoxShape3D_3hs6l")
+
+[node name="Wall-YellowPanel" type="MeshInstance3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+visible = false
+mesh = SubResource("BoxMesh_4t3m6")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Wall-YellowPanel"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall-YellowPanel/StaticBody3D"]
+shape = SubResource("BoxShape3D_3hs6l")
+
+[node name="Wall-YellowPanelLine" type="MeshInstance3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+visible = false
+mesh = SubResource("BoxMesh_3xn5t")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Wall-YellowPanelLine"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall-YellowPanelLine/StaticBody3D"]
+shape = SubResource("BoxShape3D_3hs6l")
+
+[node name="Wall-Wire" type="MeshInstance3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+visible = false
+mesh = SubResource("BoxMesh_j52e7")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Wall-Wire"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall-Wire/StaticBody3D"]
+shape = SubResource("BoxShape3D_3hs6l")
+
+[node name="Floor1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+visible = false
+mesh = SubResource("PlaneMesh_nb5yj")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor1/StaticBody3D"]
+shape = SubResource("BoxShape3D_xa6l5")
+
+[node name="Sludge" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.25, 0)
+visible = false
+mesh = SubResource("PlaneMesh_a354j")
+script = ExtResource("9_xh7sr")
+
+[node name="Floor2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+visible = false
+mesh = SubResource("PlaneMesh_6l1qy")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor2/StaticBody3D"]
+shape = SubResource("BoxShape3D_xa6l5")
+
+[node name="Floor3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+visible = false
+mesh = SubResource("PlaneMesh_dsg8s")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor3/StaticBody3D"]
+shape = SubResource("BoxShape3D_xa6l5")
+
+[node name="Ramp" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("PrismMesh_e3n56")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ramp"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ramp/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_yxofm")

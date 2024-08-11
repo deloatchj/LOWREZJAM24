@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://cfhmf3fb26sw"]
+
+[ext_resource type="Texture2D" uid="uid://chuhnxw2ooggt" path="res://Sprites/teeth-placeholder.png" id="1_e4slf"]
+[ext_resource type="Script" path="res://Scripts/nail.gd" id="1_kfvpi"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yhtuo"]
+size = Vector3(0.209961, 0.235352, 0.273438)
+
+[node name="Nail" type="Area3D"]
+script = ExtResource("1_kfvpi")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_yhtuo")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(5.96047e-08, 8.74228e-08, 2, 2, -8.74228e-08, -5.96046e-08, 8.74228e-08, 2, -8.74228e-08, 0, 0, 0)
+texture_filter = 0
+texture = ExtResource("1_e4slf")
+
+[node name="Sprite3D2" type="Sprite3D" parent="."]
+transform = Transform3D(2, -8.74228e-08, -1.47027e-07, -1.47027e-07, -8.74228e-08, -2, 8.74228e-08, 2, -8.74228e-08, 0, 0, 0)
+texture_filter = 0
+texture = ExtResource("1_e4slf")
+
+[node name="Sprite3D3" type="Sprite3D" parent="."]
+transform = Transform3D(2, -8.74228e-08, -1.47027e-07, 8.74228e-08, 2, -1.19209e-07, 1.47027e-07, 1.19209e-07, 2, 0, 0, 0)
+texture_filter = 0
+texture = ExtResource("1_e4slf")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 6.0
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

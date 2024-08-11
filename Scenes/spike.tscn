@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2tw8ccl62m7n"]
+
+[ext_resource type="Texture2D" uid="uid://dbrply432v0mq" path="res://Sprites/spikes-placeholder.png" id="1_476tp"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nvc3k"]
+
+[node name="Spike" type="StaticBody3D"]
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 1, 0)
+shape = SubResource("BoxShape3D_nvc3k")
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1.06066, 0, 1.06066, 0, 1, 0, -1.06066, 0, 1.06066, 0, 0, 0)
+
+[node name="Sprite3D3" type="Sprite3D" parent="Node3D"]
+transform = Transform3D(-2.62268e-07, 0, 6, 0, 6, 0, -6, 0, -2.62268e-07, 0, 1, 0)
+texture_filter = 0
+texture = ExtResource("1_476tp")
+
+[node name="Sprite3D4" type="Sprite3D" parent="Node3D"]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 1, 0)
+texture_filter = 0
+texture = ExtResource("1_476tp")

@@ -1,0 +1,78 @@
+[gd_scene load_steps=10 format=3 uid="uid://3yjy14an13r7"]
+
+[ext_resource type="Script" path="res://Scripts/weeper.gd" id="1_2mlk0"]
+[ext_resource type="Texture2D" uid="uid://c6ksmlvajt8s" path="res://Sprites/weeper-placeholder.png" id="1_84nsv"]
+[ext_resource type="PackedScene" uid="uid://7vjd03vpl4y6" path="res://Scenes/teeth.tscn" id="2_vdgkb"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_46cbt"]
+height = 1.55145
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3i61y"]
+atlas = ExtResource("1_84nsv")
+region = Rect2(0, 0, 32, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fm72b"]
+atlas = ExtResource("1_84nsv")
+region = Rect2(32, 0, 32, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7gh32"]
+atlas = ExtResource("1_84nsv")
+region = Rect2(64, 0, 32, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_goauo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3i61y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fm72b")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7gh32")
+}],
+"loop": true,
+"name": &"die",
+"speed": 5.0
+}]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gordf"]
+size = Vector3(1, 0.740356, 1)
+
+[node name="Weeper" type="CharacterBody3D"]
+collision_layer = 7
+collision_mask = 3
+script = ExtResource("1_2mlk0")
+speed = 0.4
+teeth_sn = ExtResource("2_vdgkb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("CapsuleShape3D_46cbt")
+
+[node name="Anim" type="AnimatedSprite3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 0.62, 0)
+billboard = 2
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_goauo")
+animation = &"die"
+autoplay = "default"
+speed_scale = 0.2
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.370178, 0)
+shape = SubResource("BoxShape3D_gordf")
+
+[node name="DieSFX" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+bus = &"SFX"
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

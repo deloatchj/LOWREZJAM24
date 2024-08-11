@@ -1,0 +1,100 @@
+[gd_scene load_steps=12 format=3 uid="uid://c553o0wiu186i"]
+
+[ext_resource type="Script" path="res://Scripts/Mimic.gd" id="1_rokfr"]
+[ext_resource type="PackedScene" uid="uid://7vjd03vpl4y6" path="res://Scenes/teeth.tscn" id="2_y6bvx"]
+[ext_resource type="PackedScene" uid="uid://cfhmf3fb26sw" path="res://Scenes/nail.tscn" id="3_yifb5"]
+[ext_resource type="Texture2D" uid="uid://bdu6ltwu4f5q" path="res://Sprites/mimic-placeholder.png" id="4_gk0jl"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7dmdu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v3y6w"]
+atlas = ExtResource("4_gk0jl")
+region = Rect2(64, 0, 32, 43)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8oyn6"]
+atlas = ExtResource("4_gk0jl")
+region = Rect2(96, 0, 32, 43)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_82tu1"]
+atlas = ExtResource("4_gk0jl")
+region = Rect2(128, 0, 32, 43)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kdg73"]
+atlas = ExtResource("4_gk0jl")
+region = Rect2(0, 0, 32, 43)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kn3hc"]
+atlas = ExtResource("4_gk0jl")
+region = Rect2(32, 0, 32, 43)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_j4550"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v3y6w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8oyn6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_82tu1")
+}],
+"loop": false,
+"name": &"die",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kdg73")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kn3hc")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[node name="Mimic" type="CharacterBody3D"]
+collision_layer = 7
+collision_mask = 7
+script = ExtResource("1_rokfr")
+teeth_sn = ExtResource("2_y6bvx")
+nail_scene = ExtResource("3_yifb5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_7dmdu")
+
+[node name="Anim" type="AnimatedSprite3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 1.31802, 0)
+billboard = 2
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_j4550")
+animation = &"walk"
+autoplay = "walk"
+frame_progress = 0.309423
+
+[node name="Marker3D" type="Marker3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="ShootTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 2.0
+autostart = true
+
+[node name="Hurtsfx" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+bus = &"SFX"
+
+[node name="Diesfx" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+bus = &"SFX"
+
+[node name="Shootsfx" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+bus = &"SFX"
+
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

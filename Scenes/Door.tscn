@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://y77ohj8qu7hy"]
+
+[ext_resource type="Texture2D" uid="uid://csfutb6hbc0qj" path="res://Textures/DOOR_4A.PNG" id="1_awbui"]
+[ext_resource type="Script" path="res://Scripts/Door.gd" id="2_5hr10"]
+[ext_resource type="Script" path="res://Scripts/toolscriptdoorkey.gd" id="3_auyy0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_su0ag"]
+shading_mode = 0
+albedo_texture = ExtResource("1_awbui")
+uv1_offset = Vector3(0.5, -0.5, 0.5)
+uv1_triplanar = true
+texture_filter = 0
+grow = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_dih77"]
+material = SubResource("StandardMaterial3D_su0ag")
+size = Vector3(0.1, 1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hno7v"]
+size = Vector3(0.1, 1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kqv5c"]
+size = Vector3(0.5, 1, 3)
+
+[node name="Door" type="MeshInstance3D"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+mesh = SubResource("BoxMesh_dih77")
+script = ExtResource("2_5hr10")
+door_num = 1
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_hno7v")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_kqv5c")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 1, 0)
+billboard = 1
+text = "Door: 1"
+script = ExtResource("3_auyy0")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
