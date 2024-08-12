@@ -145,7 +145,8 @@ func _melee_attack():
 		var bodies = %MeleeArea.get_overlapping_bodies()
 		%Hand.play("melee")
 		for body in bodies:
-			body.die()
+			if not body.is_in_group("boss"):
+				body.die()
 		await get_tree().create_timer(0.25).timeout
 		can_shoot = true
 

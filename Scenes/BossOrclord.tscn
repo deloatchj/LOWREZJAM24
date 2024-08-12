@@ -57,7 +57,7 @@ animations = [{
 [sub_resource type="BoxShape3D" id="BoxShape3D_j1vjs"]
 size = Vector3(3.5, 0.5, 3)
 
-[node name="BossOrcLord" type="CharacterBody3D"]
+[node name="BossOrcLord" type="CharacterBody3D" groups=["boss"]]
 collision_layer = 7
 collision_mask = 3
 script = ExtResource("1_nqe3m")

@@ -4,7 +4,7 @@ extends CharacterBody3D
 @export var speed = 2.0
 @export var detection_range = 5.0
 @export var teeth_sn : PackedScene
-@export var hp = 3
+@export var hp = 2
 
 @onready var player = get_tree().get_first_node_in_group("player")
 var dead = false
@@ -45,7 +45,7 @@ func die():
 	get_parent().add_child(teeth)
 
 func minus_hp(dmg):
-	if hp <= 0:
+	if hp < 1:
 		die()
 	else:
 		%Hurtsfx.play()

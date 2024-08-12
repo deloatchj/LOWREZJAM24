@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-var health = 10
+var health = 8
 var speed = 3.0
 var attack_damage = 1
 var push_damage = 1
@@ -29,8 +29,9 @@ func _physics_process(_delta):
 
 		var distance_to_player = global_transform.origin.distance_to(player.global_transform.origin)
 		if distance_to_player <= 2.0:
+			pass
 			#need to add anims here
-			player.minus_health(attack_damage)
+			#player.minus_health(attack_damage)
 		elif distance_to_player < 15.0:
 			if randf() > push_probability:
 				scream()
@@ -52,12 +53,13 @@ func _on_attack_area_body_entered(body):
 
 func _on_attack_area_body_exited(body):
 	if body.is_in_group("player"):
-		player = null
+		player = body
 
 func push_player():
 	if player:
 		var direction = (player.global_transform.origin - global_transform.origin).normalized()
-		player.velocity += direction * 500 
+		direction.y = 0  # Set the y component to zero
+		player.velocity += direction * 500
 
 func take_damage(damage):
 	health -= damage
@@ -66,8 +68,9 @@ func take_damage(damage):
 
 func scream():
 	%Anim.modulate = stun_color
-	player.speed = 3
-	player.sprint_speed = 7
-	await get_tree().create_timer(2).timeout
-	player.speed = 5
-	player.sprint_speed = 10
+	if player != null:
+		player.speed = 3
+		player.sprint_speed = 7
+		await get_tree().create_timer(2).timeout
+		player.speed = 5
+		player.sprint_speed = 10

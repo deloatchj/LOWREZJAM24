@@ -24,7 +24,7 @@ func _on_exit_pressed():
 
 func _physics_process(delta):
 	%Spiral.rotation += delta
-
+	%Spiral2.rotation += delta
 
 func _on_back_pressed():
 	%Credits.visible = false

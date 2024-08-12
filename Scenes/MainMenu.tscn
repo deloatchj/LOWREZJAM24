@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://pufxv8nu2ko8"]
+[gd_scene load_steps=12 format=3 uid="uid://pufxv8nu2ko8"]
 
 [ext_resource type="Script" path="res://Scripts/MainMenu.gd" id="1_o0ha3"]
 [ext_resource type="Theme" uid="uid://cm7qo2dxea7cn" path="res://Resources/Theme.tres" id="1_pjakf"]
 [ext_resource type="Texture2D" uid="uid://wbhnq0num06m" path="res://Sprites/background-spiral.png" id="2_x5rmk"]
 [ext_resource type="FontFile" uid="uid://byqltgdhqes1t" path="res://Fonts/3x3-Mono.ttf" id="3_a82ch"]
+[ext_resource type="Texture2D" uid="uid://besy8j8cq6dai" path="res://Textures/ToothnNail.png" id="4_tegoq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2fmq8"]
 bg_color = Color(0.510009, 0.000239114, 0.527862, 1)
@@ -34,7 +35,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0.560784, 0.372549, 1)
+color = Color(0, 0.12549, 0.0705882, 1)
 
 [node name="Menu" type="Control" parent="."]
 unique_name_in_owner = true
@@ -51,31 +52,12 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 12.0
-offset_top = 3.0
-offset_right = -12.0
-offset_bottom = -21.0
+offset_top = -13.0
+offset_bottom = -13.0
 grow_horizontal = 2
 grow_vertical = 2
-pivot_offset = Vector2(20, 20)
+pivot_offset = Vector2(32, 32)
 texture = ExtResource("2_x5rmk")
-
-[node name="Label" type="Label" parent="Menu"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 1.0
-offset_top = 17.0
-offset_right = 1.0
-offset_bottom = -36.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("3_a82ch")
-theme_override_font_sizes/font_size = 8
-text = "GAMELOGO"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="PlayButton" type="Button" parent="Menu"]
 unique_name_in_owner = true
@@ -108,6 +90,17 @@ offset_bottom = 62.0
 theme = ExtResource("1_pjakf")
 text = "EXIT"
 
+[node name="TextureRect" type="TextureRect" parent="Menu"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 5.0
+offset_bottom = 33.0
+grow_horizontal = 2
+texture = ExtResource("4_tegoq")
+expand_mode = 3
+
 [node name="Credits" type="Control" parent="."]
 unique_name_in_owner = true
 visible = false
@@ -117,6 +110,19 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Spiral2" type="TextureRect" parent="Credits"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -64.0
+offset_top = -64.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(64, 64)
+texture = ExtResource("2_x5rmk")
 
 [node name="Back" type="Button" parent="Credits"]
 layout_mode = 0
@@ -210,7 +216,6 @@ flat = true
 
 [node name="MMMusic" type="AudioStreamPlayer" parent="."]
 autoplay = true
-bus = &"Music"
 
 [connection signal="pressed" from="Menu/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="Menu/CreditsButton" to="." method="_on_credits_pressed"]
