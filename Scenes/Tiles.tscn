@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://b2aklbowme2ul"]
+[gd_scene load_steps=29 format=3 uid="uid://b2aklbowme2ul"]
 
 [ext_resource type="Material" uid="uid://cf8gtq30bg7dx" path="res://Textures/wallold.tres" id="1_xnvpp"]
 [ext_resource type="Texture2D" uid="uid://d21mbee2vjx6a" path="res://Textures/TECH_3B.PNG" id="2_8lcjb"]
@@ -58,7 +58,7 @@ texture_filter = 0
 material = SubResource("StandardMaterial3D_7qnck")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xa6l5"]
-size = Vector3(2, 0.27215, 2)
+size = Vector3(2, 0.002, 2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_16jur"]
 shading_mode = 0
@@ -73,20 +73,14 @@ material = SubResource("StandardMaterial3D_16jur")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_suuuj"]
 cull_mode = 2
 shading_mode = 0
-albedo_texture = ExtResource("6_g2ka6")
+albedo_texture = ExtResource("8_tmshi")
 texture_filter = 0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_6l1qy"]
 material = SubResource("StandardMaterial3D_suuuj")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bifuy"]
-cull_mode = 2
-shading_mode = 0
-albedo_texture = ExtResource("8_tmshi")
-texture_filter = 0
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_dsg8s"]
-material = SubResource("StandardMaterial3D_bifuy")
+[sub_resource type="BoxShape3D" id="BoxShape3D_iehjd"]
+size = Vector3(2, 0.001, 2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pv7wf"]
 shading_mode = 0
@@ -106,6 +100,7 @@ points = PackedVector3Array(1, 1.1, -1, 1, 1.1, 1, -1, -1, 1, -1, -1, -1, 1, -1,
 
 [node name="Wall-Old" type="MeshInstance3D" parent="."]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+visible = false
 mesh = SubResource("BoxMesh_cj31x")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Wall-Old"]
@@ -171,13 +166,12 @@ shape = SubResource("BoxShape3D_xa6l5")
 
 [node name="Floor3" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
-visible = false
-mesh = SubResource("PlaneMesh_dsg8s")
+mesh = SubResource("PlaneMesh_6l1qy")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Floor3"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor3/StaticBody3D"]
-shape = SubResource("BoxShape3D_xa6l5")
+shape = SubResource("BoxShape3D_iehjd")
 
 [node name="Ramp" type="MeshInstance3D" parent="."]
 visible = false

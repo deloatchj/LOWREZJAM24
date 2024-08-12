@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bt0xvs2gldik2"]
+
+[ext_resource type="Script" path="res://Scripts/KillArea.gd" id="1_sqirj"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_m31qj"]
+size = Vector3(475.397, 1, 448.079)
+
+[node name="KillArea" type="Area3D"]
+script = ExtResource("1_sqirj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, -1, 4)
+shape = SubResource("BoxShape3D_m31qj")
+
+[connection signal="body_entered" from="." to="." method="_on_area_3d_body_entered"]

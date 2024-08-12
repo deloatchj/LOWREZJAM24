@@ -45,15 +45,9 @@ func _physics_process(delta):
 
 func die():
 	player_hp = 0
-	call_deferred("set_death_screen_visibility", true)
-	get_tree().paused = true
-
-func set_death_screen_visibility(value):
-	if player != null:
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		player.get_node("CanvasLayer/Death").visible = value
 
 func retry():
 	get_tree().reload_current_scene()
+	keys.clear()
 	player_hp = 8
 	get_tree().paused = false

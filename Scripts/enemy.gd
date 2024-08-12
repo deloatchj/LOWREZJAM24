@@ -41,6 +41,7 @@ func die():
 	var teeth = teeth_sn.instantiate()
 	teeth.global_transform = global_transform
 	teeth.transform.origin.y = 1.1
+	teeth.scale = Vector3(5,5,5)
 	get_parent().add_child(teeth)
 
 func minus_hp(dmg):

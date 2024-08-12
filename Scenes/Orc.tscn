@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://7vjd03vpl4y6" path="res://Scenes/teeth.tscn" id="2_gsryb"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fcjjq"]
+height = 1.9
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3i68q"]
 atlas = ExtResource("1_tihub")
@@ -74,7 +75,7 @@ animations = [{
 }]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_j1vjs"]
-size = Vector3(3.5, 0.5, 3)
+size = Vector3(1, 2, 1)
 
 [node name="Orc" type="CharacterBody3D"]
 collision_layer = 7
@@ -84,7 +85,7 @@ speed = 2.5
 teeth_sn = ExtResource("2_gsryb")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0)
 shape = SubResource("CapsuleShape3D_fcjjq")
 
 [node name="Anim" type="AnimatedSprite3D" parent="."]

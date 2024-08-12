@@ -8,13 +8,22 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var can_shoot = true
 var is_sprinting = false
 @onready var teeth = %Teeth
+@onready var hand = %Hand
 
 enum GunMode {REVOLVER, SHOTGUN, ASSAULT_RIFLE, MELEE}
 var current_gun_mode = GunMode.REVOLVER
-
+var prev_gun_mode
+var meleemode = false
+var new_anim : String
 func _ready():
 	%Hand.animation_finished.connect(shoot_anim_over)
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	if current_gun_mode == GunMode.REVOLVER:
+		%Hand.play("idle_r")
+	elif current_gun_mode == GunMode.SHOTGUN:
+		%Hand.play("idle_sh")
+	elif current_gun_mode == GunMode.ASSAULT_RIFLE:
+		%Hand.play("idle_ar")
 
 func _physics_process(delta):
 	if 1 in Game.keys:
@@ -64,7 +73,25 @@ func _physics_process(delta):
 	
 	if Input.is_action_pressed("shoot"):
 		_shoot()
-
+	if Input.is_action_just_pressed("melee"):
+		if meleemode:
+			current_gun_mode = prev_gun_mode
+			match current_gun_mode:
+				GunMode.REVOLVER:
+					new_anim = "idle_r"
+					%Hand.play(new_anim)
+				GunMode.SHOTGUN:
+					new_anim = "idle_sh"
+					%Hand.play(new_anim)
+				GunMode.ASSAULT_RIFLE:
+					new_anim = "idle_ar"
+					%Hand.play(new_anim)
+			meleemode = false
+		else:
+			%Hand.play("idle_melee")
+			prev_gun_mode = current_gun_mode
+			current_gun_mode = GunMode.MELEE
+			meleemode = true
 	move_and_slide()
 
 func _input(event):
@@ -72,20 +99,6 @@ func _input(event):
 		rotate_y(-event.relative.x * mouse_sensitivity)
 		$Camera3D.rotate_x(-event.relative.y * mouse_sensitivity)
 		$Camera3D.rotation.x = clampf($Camera3D.rotation.x, -deg_to_rad(70), deg_to_rad(70))
-	
-	if Input.is_action_just_pressed("revolver"):
-		%Hand.play("idle")
-		current_gun_mode = GunMode.REVOLVER
-		%Hand.modulate = Color.WHITE
-	elif Input.is_action_just_pressed("shotgun"):
-		current_gun_mode = GunMode.SHOTGUN
-		%Hand.modulate = Color.YELLOW
-	elif Input.is_action_just_pressed("assault"):
-		current_gun_mode = GunMode.ASSAULT_RIFLE
-		%Hand.modulate = Color.MEDIUM_SLATE_BLUE
-	elif Input.is_action_just_pressed("melee"):
-		%Hand.play("idle_melee")
-		current_gun_mode = GunMode.MELEE
 
 func _shoot():
 	if !can_shoot:
@@ -93,29 +106,28 @@ func _shoot():
 	
 	match current_gun_mode:
 		GunMode.REVOLVER:
-			%Hand.modulate = Color.WHITE
 			if Game.player_hp >= 1:
 				can_shoot = false
-				%Hand.play("shoot")
-				%Shootsfx.play()
+				%Hand.play("shoot_r")
+				%RShootsfx.play()
 				%Shotgunfx.emitting = true
 				if %Ray.is_colliding() and %Ray.get_collider().has_method("die"):
 					%Ray.get_collider().minus_hp(1)
 				Game.player_hp -= 1
 		GunMode.SHOTGUN:
-			%Hand.modulate = Color.YELLOW
 			if Game.player_hp >= 2:
 				can_shoot = false
-				%Hand.play("shoot")
+				%Hand.play("shoot_sh")
+				%ShShootsfx.play()
 				%Shotgunfx.emitting = true
 				if %Ray.is_colliding() and %Ray.get_collider().has_method("die"):
 					%Ray.get_collider().minus_hp(3)
 				Game.player_hp -= 2
 		GunMode.ASSAULT_RIFLE:
-			%Hand.modulate = Color.MEDIUM_SLATE_BLUE
 			if Game.player_hp >= 1:
 				can_shoot = false
-				%Hand.play("shoot")
+				%Hand.play("shoot_ar")
+				%AShootsfx.play()
 				%Shotgunfx.emitting = true
 				if %Ray.is_colliding() and %Ray.get_collider().has_method("die"):
 					%Ray.get_collider().minus_hp(2)
@@ -143,6 +155,9 @@ func shoot_anim_over():
 func minus_health(hp):
 	print(Game.player_hp)
 	if Game.player_hp < 1:
+		%Death.visible = true
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		get_tree().paused = true
 		Game.die()
 	Game.player_hp -= hp
 	%Hurtsfx.play()

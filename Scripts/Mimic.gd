@@ -4,7 +4,7 @@ extends CharacterBody3D
 @export var speed = 1.0
 @export var detection_range = 10.0
 @export var teeth_sn : PackedScene
-@export var hp = 5
+@export var hp = 2
 @export var nail_scene : PackedScene
 @export var shoot_interval = 2.0
 
@@ -16,6 +16,7 @@ func _physics_process(delta):
 	if dead:
 		return
 	if player != null:
+		look_at(player.global_transform.origin)
 		var direction = (player.global_transform.origin - global_transform.origin).normalized()
 		velocity = direction * speed
 		move_and_slide()
@@ -45,6 +46,7 @@ func die():
 	var teeth = teeth_sn.instantiate()
 	teeth.global_transform = global_transform
 	teeth.transform.origin.y = 1.1
+	teeth.scale = Vector3(5,5,5)
 	get_parent().add_child(teeth)
 
 func minus_hp(dmg):

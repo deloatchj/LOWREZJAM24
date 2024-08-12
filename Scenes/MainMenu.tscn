@@ -208,6 +208,10 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_0k8a8")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_rgt24")
 flat = true
 
+[node name="MMMusic" type="AudioStreamPlayer" parent="."]
+autoplay = true
+bus = &"Music"
+
 [connection signal="pressed" from="Menu/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="Menu/CreditsButton" to="." method="_on_credits_pressed"]
 [connection signal="pressed" from="Menu/Exit" to="." method="_on_exit_pressed"]

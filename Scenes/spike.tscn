@@ -6,12 +6,6 @@
 
 [node name="Spike" type="StaticBody3D"]
 
-[node name="Area3D" type="Area3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 1, 0)
-shape = SubResource("BoxShape3D_nvc3k")
-
 [node name="Node3D" type="Node3D" parent="."]
 transform = Transform3D(1.06066, 0, 1.06066, 0, 1, 0, -1.06066, 0, 1.06066, 0, 0, 0)
 
@@ -24,3 +18,7 @@ texture = ExtResource("1_476tp")
 transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 1, 0)
 texture_filter = 0
 texture = ExtResource("1_476tp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 1, 0)
+shape = SubResource("BoxShape3D_nvc3k")

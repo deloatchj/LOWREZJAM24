@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bdu6ltwu4f5q" path="res://Sprites/mimic-placeholder.png" id="4_gk0jl"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7dmdu"]
+height = 1.9
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v3y6w"]
 atlas = ExtResource("4_gk0jl")
@@ -63,7 +64,7 @@ teeth_sn = ExtResource("2_y6bvx")
 nail_scene = ExtResource("3_yifb5")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0)
 shape = SubResource("CapsuleShape3D_7dmdu")
 
 [node name="Anim" type="AnimatedSprite3D" parent="."]
@@ -74,11 +75,10 @@ texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_j4550")
 animation = &"walk"
 autoplay = "walk"
-frame_progress = 0.309423
 
 [node name="Marker3D" type="Marker3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.19266, -0.6)
 
 [node name="ShootTimer" type="Timer" parent="."]
 unique_name_in_owner = true
