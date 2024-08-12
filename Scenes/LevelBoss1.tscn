@@ -103,6 +103,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0.5, -3)
 [node name="MarkerR" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5, 0.5, -3)
 
-[node name="LevelMusic" type="AudioStreamPlayer" parent="."]
+[node name="LevelMusic" type="Node" parent="."]
+
+[node name="LevelDrone" type="AudioStreamPlayer" parent="LevelMusic"]
+
+[node name="LevelDrums" type="AudioStreamPlayer" parent="LevelMusic"]
+bus = &"Drums"
+
+[node name="LevelInstruments" type="AudioStreamPlayer" parent="LevelMusic"]
+bus = &"Instruments"
 
 [connection signal="body_entered" from="KillArea" to="." method="_on_kill_area_body_entered"]

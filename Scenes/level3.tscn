@@ -19,7 +19,7 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
-[node name="CharacterBody3D" parent="." instance=ExtResource("2_4weip")]
+[node name="Player" parent="." instance=ExtResource("2_4weip")]
 
 [node name="Teeth" parent="." instance=ExtResource("3_3wvgq")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -6, 1, -20)
@@ -27,55 +27,74 @@ transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -6, 1, -20)
 [node name="Teeth2" parent="." instance=ExtResource("3_3wvgq")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -6, 1, -55)
 
-[node name="EndDoor" parent="." instance=ExtResource("4_sopr3")]
+[node name="Enemies" type="Node3D" parent="."]
+
+[node name="Mimic" parent="Enemies" instance=ExtResource("7_p8jmc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, -18)
+
+[node name="Mimic2" parent="Enemies" instance=ExtResource("7_p8jmc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -38)
+
+[node name="Mimic3" parent="Enemies" instance=ExtResource("7_p8jmc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -76)
+
+[node name="Mimic4" parent="Enemies" instance=ExtResource("7_p8jmc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -67)
+
+[node name="DoorKeys" type="Node3D" parent="."]
+
+[node name="EndDoor" parent="DoorKeys" instance=ExtResource("4_sopr3")]
 transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, 3, 1, -11)
+skeleton = NodePath("../..")
 
-[node name="EndDoor2" parent="." instance=ExtResource("4_sopr3")]
+[node name="EndDoor2" parent="DoorKeys" instance=ExtResource("4_sopr3")]
 transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, 5, 1, -11)
+skeleton = NodePath("../..")
 
-[node name="EndDoor3" parent="." instance=ExtResource("4_sopr3")]
+[node name="EndDoor3" parent="DoorKeys" instance=ExtResource("4_sopr3")]
 transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, 17, 1, -81)
+skeleton = NodePath("../..")
 next_level = ExtResource("5_fry8v")
 
-[node name="EndDoor4" parent="." instance=ExtResource("4_sopr3")]
+[node name="EndDoor4" parent="DoorKeys" instance=ExtResource("4_sopr3")]
 transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, 19, 1, -81)
+skeleton = NodePath("../..")
 next_level = ExtResource("5_fry8v")
 
-[node name="Door" parent="." instance=ExtResource("5_olssc")]
+[node name="Door" parent="DoorKeys" instance=ExtResource("5_olssc")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -3, 1, -19)
+skeleton = NodePath("../..")
 
-[node name="Door2" parent="." instance=ExtResource("5_olssc")]
+[node name="Door2" parent="DoorKeys" instance=ExtResource("5_olssc")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -3, 1, -21)
+skeleton = NodePath("../..")
 
-[node name="Door3" parent="." instance=ExtResource("5_olssc")]
+[node name="Door3" parent="DoorKeys" instance=ExtResource("5_olssc")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 1, 1, -75)
+skeleton = NodePath("../..")
 door_num = 2
 
-[node name="Door4" parent="." instance=ExtResource("5_olssc")]
+[node name="Door4" parent="DoorKeys" instance=ExtResource("5_olssc")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 1, 1, -77)
+skeleton = NodePath("../..")
 door_num = 2
 
-[node name="Key" parent="." instance=ExtResource("6_storj")]
+[node name="Key" parent="DoorKeys" instance=ExtResource("6_storj")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -6, 1, -76)
 
-[node name="Key2" parent="." instance=ExtResource("6_storj")]
+[node name="Key2" parent="DoorKeys" instance=ExtResource("6_storj")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 21, 1, -38)
 key_num = 2
 
-[node name="LevelMusic" type="AudioStreamPlayer" parent="."]
-bus = &"Music"
-
-[node name="Mimic" parent="." instance=ExtResource("7_p8jmc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, -18)
-
-[node name="Mimic2" parent="." instance=ExtResource("7_p8jmc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -38)
-
-[node name="Mimic3" parent="." instance=ExtResource("7_p8jmc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -76)
-
-[node name="Mimic4" parent="." instance=ExtResource("7_p8jmc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -67)
-
 [node name="KillArea" parent="." instance=ExtResource("9_8a82e")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+
+[node name="LevelMusic" type="Node" parent="."]
+
+[node name="LevelDrone" type="AudioStreamPlayer" parent="LevelMusic"]
+
+[node name="LevelDrums" type="AudioStreamPlayer" parent="LevelMusic"]
+bus = &"Drums"
+
+[node name="LevelInstruments" type="AudioStreamPlayer" parent="LevelMusic"]
+bus = &"Instruments"

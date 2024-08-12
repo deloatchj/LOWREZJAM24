@@ -185,11 +185,6 @@ mouse_sensitivity = 0.05
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.870075, 0)
 shape = SubResource("CapsuleShape3D_gavwr")
 
-[node name="Ray" type="RayCast3D" parent="."]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-target_position = Vector3(0, 0, -100)
-
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 attributes = SubResource("CameraAttributesPractical_5sps1")
@@ -201,6 +196,10 @@ visible = false
 light_energy = 10.0
 spot_range = 40.0
 spot_angle = 11.0771
+
+[node name="Ray" type="RayCast3D" parent="Camera3D"]
+unique_name_in_owner = true
+target_position = Vector3(0, 0, -100)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)

@@ -50,8 +50,6 @@ transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, -1, 1,
 [node name="EndDoor2" parent="." instance=ExtResource("4_51tsw")]
 transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, 1, 1, -24)
 
-[node name="LevelMusic" type="AudioStreamPlayer" parent="."]
-
 [node name="EndDoor3" parent="." instance=ExtResource("4_51tsw")]
 transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, -1, 1, -53.5)
 next_level = ExtResource("5_em68d")
@@ -59,3 +57,13 @@ next_level = ExtResource("5_em68d")
 [node name="EndDoor4" parent="." instance=ExtResource("4_51tsw")]
 transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, 1, 1, -53.5)
 next_level = ExtResource("5_em68d")
+
+[node name="LevelMusic" type="Node" parent="."]
+
+[node name="LevelDrone" type="AudioStreamPlayer" parent="LevelMusic"]
+
+[node name="LevelDrums" type="AudioStreamPlayer" parent="LevelMusic"]
+bus = &"Drums"
+
+[node name="LevelInstruments" type="AudioStreamPlayer" parent="LevelMusic"]
+bus = &"Instruments"

@@ -26,6 +26,7 @@ func _process(_delta):
 		change_scene("res://Scenes/Pinnacle.tscn")
 
 func change_scene(scene):
+	player_hp = 8
 	if not keys.is_empty():
 		keys.clear()
 	if scene is PackedScene:

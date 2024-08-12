@@ -16,6 +16,9 @@ sky_material = SubResource("PanoramaSkyMaterial_3fmln")
 [sub_resource type="Environment" id="Environment_kshis"]
 background_mode = 2
 sky = SubResource("Sky_738he")
+tonemap_mode = 3
+volumetric_fog_density = 0.0
+volumetric_fog_albedo = Color(0, 0, 1, 1)
 
 [node name="Node3D" type="Node3D"]
 
@@ -54,10 +57,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 2, -14)
 [node name="Spike8" parent="Spikes" instance=ExtResource("3_ucx74")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 2, -16)
 
-[node name="LevelMusic" type="AudioStreamPlayer" parent="."]
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_kshis")
 
 [node name="KillArea" parent="." instance=ExtResource("5_dbtls")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="LevelMusic" type="Node" parent="."]
+
+[node name="LevelDrone" type="AudioStreamPlayer" parent="LevelMusic"]
+
+[node name="LevelDrums" type="AudioStreamPlayer" parent="LevelMusic"]
+bus = &"Drums"
+
+[node name="LevelInstruments" type="AudioStreamPlayer" parent="LevelMusic"]
+bus = &"Instruments"

@@ -112,12 +112,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37, 0, 11)
 [node name="Eye6" parent="Enemies" instance=ExtResource("10_pbcqq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35, 0, 20)
 
-[node name="LevelMusic" type="AudioStreamPlayer" parent="."]
-bus = &"Music"
-
 [node name="Ritual" parent="." instance=ExtResource("11_2vj8k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44, 0, 4)
 ritualmode = 1
 
 [node name="KillArea" parent="." instance=ExtResource("12_ppvm8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="LevelMusic" type="Node" parent="."]
+
+[node name="LevelDrone" type="AudioStreamPlayer" parent="LevelMusic"]
+
+[node name="LevelDrums" type="AudioStreamPlayer" parent="LevelMusic"]
+bus = &"Drums"
+
+[node name="LevelInstruments" type="AudioStreamPlayer" parent="LevelMusic"]
+bus = &"Instruments"
