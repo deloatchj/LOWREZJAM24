@@ -48,6 +48,9 @@ func minus_hp(dmg):
 	if hp < 1:
 		die()
 	else:
+		var dmg_tween = get_tree().create_tween()
+		dmg_tween.tween_property(%Anim, "modulate", Color(0, 1, 0, 1), 0.2)
+		dmg_tween.tween_property(%Anim, "modulate", Color(1, 1, 1, 1), 0.2)
 		%Hurtsfx.play()
 		hp -= dmg
 
