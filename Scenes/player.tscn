@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://cbvitixxqntop"]
+[gd_scene load_steps=30 format=3 uid="uid://cbvitixxqntop"]
 
 [ext_resource type="Texture2D" uid="uid://d2fq3klu2ilat" path="res://Sprites/gun-placeholder.png" id="1_3iqld"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_g37v8"]
@@ -37,21 +37,17 @@ region = Rect2(128, 0, 64, 64)
 atlas = ExtResource("1_3iqld")
 region = Rect2(0, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0rqti"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_y73kq"]
 atlas = ExtResource("4_7a0ii")
 region = Rect2(64, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_vpera"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_7fit3"]
 atlas = ExtResource("4_7a0ii")
 region = Rect2(128, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_fqfwq"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_rtbfo"]
 atlas = ExtResource("4_7a0ii")
 region = Rect2(192, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_os8m5"]
-atlas = ExtResource("4_7a0ii")
-region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4wvxw"]
 atlas = ExtResource("1_3iqld")
@@ -115,27 +111,18 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 0.1,
-"texture": SubResource("AtlasTexture_0rqti")
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y73kq")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_vpera")
+"texture": SubResource("AtlasTexture_7fit3")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_fqfwq")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vpera")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0rqti")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_os8m5")
+"texture": SubResource("AtlasTexture_rtbfo")
 }],
 "loop": false,
 "name": &"melee",
-"speed": 5.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -221,8 +208,9 @@ grow_vertical = 2
 unique_name_in_owner = true
 position = Vector2(32, 32)
 sprite_frames = SubResource("SpriteFrames_olwvt")
-animation = &"idle_ar"
+animation = &"melee"
 autoplay = "idle_r"
+frame_progress = 0.843518
 
 [node name="Teeth" type="Sprite2D" parent="CanvasLayer/Control"]
 unique_name_in_owner = true
