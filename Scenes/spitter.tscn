@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://bldmgiap0dnlc"]
 
-[ext_resource type="Script" path="res://Scenes/Arenaspitter.gd" id="1_cfril"]
+[ext_resource type="Script" path="res://Scripts/Arenaspitter.gd" id="1_cfril"]
 [ext_resource type="MeshLibrary" uid="uid://ckfuxrw1vgfbw" path="res://Resources/Tiles.meshlib" id="1_wocmp"]
 [ext_resource type="PackedScene" uid="uid://b2tw8ccl62m7n" path="res://Scenes/spike.tscn" id="2_mhvj6"]
 [ext_resource type="PackedScene" uid="uid://cbvitixxqntop" path="res://Scenes/player.tscn" id="3_1j8xf"]
@@ -52,7 +52,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -38.819)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -38.819)
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("3_1j8xf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0157187, -27)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0157187, 0)
 
 [node name="EndDoor" parent="." instance=ExtResource("4_51tsw")]
 transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, -1, 1, -24)
