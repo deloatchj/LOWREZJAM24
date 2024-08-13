@@ -26,13 +26,13 @@ func _ready():
 		%Hand.play("idle_ar")
 
 func _physics_process(delta):
+	%Spiral.rotation += delta
 	if 1 in Game.keys:
 		%Key1.visible = true
 		%Key1.modulate = Color.RED
 	if 2 in Game.keys:
 		%Key2.visible = true
 		%Key2.modulate = Color.YELLOW
-	%Spiral.rotation += delta
 	match Game.player_hp:
 		8:
 			teeth.frame = 0

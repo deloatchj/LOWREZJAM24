@@ -1,0 +1,159 @@
+[gd_scene load_steps=21 format=3 uid="uid://coujk0qruee52"]
+
+[ext_resource type="Script" path="res://Scripts/Spitter.gd" id="1_047sl"]
+[ext_resource type="PackedScene" uid="uid://cfhmf3fb26sw" path="res://Scenes/nail.tscn" id="2_a75vw"]
+[ext_resource type="Script" path="res://Resources/state_machine.gd" id="2_y44ii"]
+[ext_resource type="PackedScene" uid="uid://7vjd03vpl4y6" path="res://Scenes/teeth.tscn" id="3_bk8lq"]
+[ext_resource type="Script" path="res://Resources/hide_state.gd" id="4_2a373"]
+[ext_resource type="Script" path="res://Resources/idle_state.gd" id="4_s3l3l"]
+[ext_resource type="Script" path="res://Resources/chase_state.gd" id="5_66xb4"]
+[ext_resource type="Texture2D" uid="uid://b0r50qdt336h2" path="res://Sprites/spitter-placeholder-export.png" id="5_hnvmq"]
+[ext_resource type="Script" path="res://Resources/spin_state.gd" id="7_kkkrb"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3eoxx"]
+height = 1.9
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y4s0s"]
+atlas = ExtResource("5_hnvmq")
+region = Rect2(0, 0, 32, 43)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p6dsk"]
+atlas = ExtResource("5_hnvmq")
+region = Rect2(64, 0, 32, 43)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nr5gm"]
+atlas = ExtResource("5_hnvmq")
+region = Rect2(32, 0, 32, 43)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hy0f8"]
+atlas = ExtResource("5_hnvmq")
+region = Rect2(64, 0, 32, 43)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0dvs7"]
+atlas = ExtResource("5_hnvmq")
+region = Rect2(128, 0, 32, 43)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qirvj"]
+atlas = ExtResource("5_hnvmq")
+region = Rect2(96, 0, 32, 43)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vtilh"]
+atlas = ExtResource("5_hnvmq")
+region = Rect2(128, 0, 32, 43)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m3sky"]
+atlas = ExtResource("5_hnvmq")
+region = Rect2(0, 0, 32, 43)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_prkn2"]
+atlas = ExtResource("5_hnvmq")
+region = Rect2(32, 0, 32, 43)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_52ca8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y4s0s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p6dsk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nr5gm")
+}],
+"loop": true,
+"name": &"atk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hy0f8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0dvs7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qirvj")
+}],
+"loop": false,
+"name": &"die",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vtilh")
+}],
+"loop": true,
+"name": &"hide",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m3sky")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_prkn2")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[node name="Spitter" type="CharacterBody3D" groups=["boss"]]
+collision_layer = 6
+collision_mask = 6
+script = ExtResource("1_047sl")
+orb_scene = ExtResource("2_a75vw")
+teeth_sn = ExtResource("3_bk8lq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0)
+shape = SubResource("CapsuleShape3D_3eoxx")
+
+[node name="Anim" type="AnimatedSprite3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 1.31802, 0)
+billboard = 2
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_52ca8")
+animation = &"hide"
+autoplay = "walk"
+
+[node name="MuzzleLeft" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 1.5, 0)
+
+[node name="MuzzleRight" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 1.5, 0)
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("2_y44ii")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("4_s3l3l")
+
+[node name="Timer" type="Timer" parent="StateMachine/Idle"]
+
+[node name="Hide" type="Node" parent="StateMachine"]
+script = ExtResource("4_2a373")
+
+[node name="Timer" type="Timer" parent="StateMachine/Hide"]
+
+[node name="Chase" type="Node" parent="StateMachine"]
+script = ExtResource("5_66xb4")
+
+[node name="Spin" type="Node" parent="StateMachine"]
+script = ExtResource("7_kkkrb")
+
+[node name="Timer" type="Timer" parent="StateMachine/Spin"]
+
+[node name="Hurtsfx" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+bus = &"SFX"
+
+[node name="Diesfx" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+bus = &"SFX"
+
+[connection signal="timeout" from="StateMachine/Idle/Timer" to="StateMachine/Idle" method="_on_Timer_timeout"]
+[connection signal="timeout" from="StateMachine/Hide/Timer" to="StateMachine/Hide" method="_on_Timer_timeout"]
+[connection signal="timeout" from="StateMachine/Spin/Timer" to="StateMachine/Spin" method="_on_Timer_timeout"]

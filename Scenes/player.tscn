@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://brdj6wlxgxy1v" path="res://Sprites/hpsheet_placeholder.png" id="4_tqp76"]
 [ext_resource type="Texture2D" uid="uid://by1fiftoo0qee" path="res://Sprites/shotgun-particles-placeholder.png" id="5_n3hn7"]
 [ext_resource type="Texture2D" uid="uid://dsbeyyxhct08r" path="res://Sprites/key-placeholder.png" id="6_unyrf"]
-[ext_resource type="Texture2D" uid="uid://wbhnq0num06m" path="res://Sprites/background-spiral.png" id="8_27q1b"]
+[ext_resource type="Texture2D" uid="uid://cbepdaogyx4xk" path="res://Sprites/death-screen-spiral.png" id="8_3srp3"]
 [ext_resource type="Theme" uid="uid://cm7qo2dxea7cn" path="res://Resources/Theme.tres" id="9_05ksp"]
 [ext_resource type="FontFile" uid="uid://xy3t00miaccy" path="res://Fonts/Abaddon Bold.ttf" id="10_oe7xp"]
 
@@ -200,6 +200,7 @@ spot_angle = 11.0771
 [node name="Ray" type="RayCast3D" parent="Camera3D"]
 unique_name_in_owner = true
 target_position = Vector3(0, 0, -100)
+collision_mask = 3
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
@@ -287,7 +288,7 @@ offset_bottom = -17.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(20, 20)
-texture = ExtResource("8_27q1b")
+texture = ExtResource("8_3srp3")
 
 [node name="Control" type="Control" parent="CanvasLayer/Death"]
 layout_mode = 1
