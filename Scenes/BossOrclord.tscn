@@ -1,10 +1,18 @@
-[gd_scene load_steps=12 format=3 uid="uid://cerba0xkxw3na"]
+[gd_scene load_steps=19 format=3 uid="uid://cerba0xkxw3na"]
 
 [ext_resource type="Script" path="res://Scripts/BossOrcLord.gd" id="1_nqe3m"]
 [ext_resource type="PackedScene" uid="uid://d3mqexrp1ayx7" path="res://Scenes/Orc.tscn" id="2_i27i6"]
 [ext_resource type="Texture2D" uid="uid://dhabbgi6aaehb" path="res://Sprites/monster-placeholder.png" id="2_uirwp"]
+[ext_resource type="PackedScene" uid="uid://7vjd03vpl4y6" path="res://Scenes/teeth.tscn" id="3_qtvnp"]
+[ext_resource type="Script" path="res://Resources/OrcCloseRangeAttack.gd" id="4_0oufv"]
+[ext_resource type="Script" path="res://Resources/state_machine.gd" id="4_7xl27"]
+[ext_resource type="Script" path="res://Resources/OrcRush.gd" id="4_omyhs"]
+[ext_resource type="PackedScene" uid="uid://djxplj21hpowh" path="res://Scenes/club.tscn" id="4_tgmr5"]
+[ext_resource type="Script" path="res://Resources/orc_idle.gd" id="4_tlb8k"]
+[ext_resource type="Script" path="res://Resources/OrcScream.gd" id="5_elvl0"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fcjjq"]
+height = 1.89593
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vhm6p"]
 atlas = ExtResource("2_uirwp")
@@ -55,17 +63,18 @@ animations = [{
 }]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_j1vjs"]
-size = Vector3(3.5, 0.5, 3)
+size = Vector3(3, 3, 3)
 
 [node name="BossOrcLord" type="CharacterBody3D" groups=["boss"]]
 collision_layer = 7
-collision_mask = 3
+collision_mask = 7
 script = ExtResource("1_nqe3m")
-orc_scene = ExtResource("2_i27i6")
-stun_color = Color(0.94902, 0, 0.933333, 1)
+minion_scene = ExtResource("2_i27i6")
+teeth_scene = ExtResource("3_qtvnp")
+club_scene = ExtResource("4_tgmr5")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0)
 shape = SubResource("CapsuleShape3D_fcjjq")
 
 [node name="Anim" type="AnimatedSprite3D" parent="."]
@@ -82,14 +91,43 @@ frame_progress = 0.704925
 [node name="AttackArea" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AttackArea"]
-transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 1.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 shape = SubResource("BoxShape3D_j1vjs")
 
 [node name="SpawnTimer" type="Timer" parent="."]
-wait_time = 20.0
+wait_time = 10.0
 autostart = true
 
-[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 3)
+
+[node name="Marker3D2" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -3)
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("4_7xl27")
+
+[node name="Rush" type="Node" parent="StateMachine"]
+script = ExtResource("4_omyhs")
+
+[node name="Scream" type="Node" parent="StateMachine"]
+script = ExtResource("5_elvl0")
+
+[node name="CloseRangeAttack" type="Node" parent="StateMachine"]
+script = ExtResource("4_0oufv")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("4_tlb8k")
+
+[node name="Hurtsfx" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+bus = &"SFX"
+
+[node name="Diesfx" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+bus = &"SFX"
+
 [connection signal="body_entered" from="AttackArea" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
 [connection signal="body_exited" from="AttackArea" to="." method="_on_attack_area_body_exited"]
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

@@ -73,7 +73,7 @@ func _physics_process(delta):
 	
 	if Input.is_action_pressed("shoot"):
 		_shoot()
-	if Input.is_action_just_pressed("melee"):
+	if Input.is_action_just_pressed("melee") and Game.melee_unlocked:
 		if meleemode:
 			current_gun_mode = prev_gun_mode
 			match current_gun_mode:
@@ -135,7 +135,8 @@ func _shoot():
 				await get_tree().create_timer(0.1).timeout
 				can_shoot = true
 		GunMode.MELEE:
-			_melee_attack()
+			if Game.melee_unlocked:
+				_melee_attack()
 
 func _melee_attack():
 		if !can_shoot:

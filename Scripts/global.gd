@@ -4,6 +4,7 @@ extends Node
 var deathscreen
 var player_hp = 8
 var keys = []
+var melee_unlocked = false
 
 func _process(_delta):
 	if Input.is_key_pressed(KEY_1):
