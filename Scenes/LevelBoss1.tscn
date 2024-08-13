@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://dhs88u4muecia"]
+[gd_scene load_steps=8 format=3 uid="uid://dhs88u4muecia"]
 
 [ext_resource type="Script" path="res://Scripts/orclord.gd" id="1_u5wl6"]
 [ext_resource type="MeshLibrary" uid="uid://ckfuxrw1vgfbw" path="res://Resources/Tiles.meshlib" id="2_tciyh"]
 [ext_resource type="PackedScene" uid="uid://cbvitixxqntop" path="res://Scenes/player.tscn" id="3_p4tbn"]
 [ext_resource type="PackedScene" uid="uid://b2tw8ccl62m7n" path="res://Scenes/spike.tscn" id="4_k0h4i"]
 [ext_resource type="PackedScene" uid="uid://cerba0xkxw3na" path="res://Scenes/BossOrclord.tscn" id="5_5fklo"]
+[ext_resource type="AudioStream" uid="uid://b7qew6oeqs4fv" path="res://Sounds/drone.mp3" id="6_e0ux6"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_y8yja"]
 size = Vector3(8.8418, 1, 8.8291)
@@ -106,6 +107,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5, 0.5, -3)
 [node name="LevelMusic" type="Node" parent="."]
 
 [node name="LevelDrone" type="AudioStreamPlayer" parent="LevelMusic"]
+stream = ExtResource("6_e0ux6")
 
 [node name="LevelDrums" type="AudioStreamPlayer" parent="LevelMusic"]
 bus = &"Drums"

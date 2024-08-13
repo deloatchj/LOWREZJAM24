@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bldmgiap0dnlc"]
+[gd_scene load_steps=14 format=3 uid="uid://bldmgiap0dnlc"]
 
 [ext_resource type="Script" path="res://Scripts/Arenaspitter.gd" id="1_cfril"]
 [ext_resource type="MeshLibrary" uid="uid://ckfuxrw1vgfbw" path="res://Resources/Tiles.meshlib" id="1_wocmp"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c84v8emwefa5q" path="res://Scenes/end_door.tscn" id="4_51tsw"]
 [ext_resource type="PackedScene" uid="uid://py0i71ombd08" path="res://Scenes/level5.tscn" id="5_em68d"]
 [ext_resource type="PackedScene" uid="uid://coujk0qruee52" path="res://Scenes/BossSpitter.tscn" id="6_gp1e7"]
+[ext_resource type="AudioStream" uid="uid://b7qew6oeqs4fv" path="res://Sounds/drone.mp3" id="7_d0dsu"]
 [ext_resource type="PackedScene" uid="uid://7vjd03vpl4y6" path="res://Scenes/teeth.tscn" id="7_ma01k"]
 [ext_resource type="PackedScene" uid="uid://c553o0wiu186i" path="res://Scenes/mimic.tscn" id="9_7g0u2"]
 [ext_resource type="PackedScene" uid="uid://x4irp115byoq" path="res://Scenes/eye.tscn" id="10_o2724"]
@@ -71,6 +72,7 @@ next_level = ExtResource("5_em68d")
 [node name="LevelMusic" type="Node" parent="."]
 
 [node name="LevelDrone" type="AudioStreamPlayer" parent="LevelMusic"]
+stream = ExtResource("7_d0dsu")
 
 [node name="LevelDrums" type="AudioStreamPlayer" parent="LevelMusic"]
 bus = &"Drums"

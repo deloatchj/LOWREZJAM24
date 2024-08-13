@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://pufxv8nu2ko8"]
+[gd_scene load_steps=13 format=3 uid="uid://pufxv8nu2ko8"]
 
 [ext_resource type="Script" path="res://Scripts/MainMenu.gd" id="1_o0ha3"]
 [ext_resource type="Theme" uid="uid://cm7qo2dxea7cn" path="res://Resources/Theme.tres" id="1_pjakf"]
 [ext_resource type="Texture2D" uid="uid://wbhnq0num06m" path="res://Sprites/background-spiral.png" id="2_x5rmk"]
 [ext_resource type="FontFile" uid="uid://byqltgdhqes1t" path="res://Fonts/3x3-Mono.ttf" id="3_a82ch"]
 [ext_resource type="Texture2D" uid="uid://besy8j8cq6dai" path="res://Textures/ToothnNail.png" id="4_tegoq"]
+[ext_resource type="AudioStream" uid="uid://b7qew6oeqs4fv" path="res://Sounds/drone.mp3" id="6_h84wn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2fmq8"]
 bg_color = Color(0.510009, 0.000239114, 0.527862, 1)
@@ -215,6 +216,7 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_rgt24")
 flat = true
 
 [node name="MMMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_h84wn")
 autoplay = true
 
 [connection signal="pressed" from="Menu/PlayButton" to="." method="_on_play_button_pressed"]
