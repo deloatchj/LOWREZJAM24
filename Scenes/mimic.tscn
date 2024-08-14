@@ -100,6 +100,7 @@ bus = &"SFX"
 [node name="Shootsfx" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("6_gm6j8")
+volume_db = -20.0
 bus = &"SFX"
 
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
