@@ -1,14 +1,14 @@
 extends CharacterBody3D
-@export var hp = .5
+@export var hp = 1
 @export var teeth_sn : PackedScene
-	
-func _ready():
-	pass # Replace with function body.
 
 func minus_hp(dmg):
 	if hp < 1:
 		die()
 	else:
+		var dmg_tween = get_tree().create_tween()
+		dmg_tween.tween_property(%Anim, "modulate", Color(1, 1, 0, 1), 0.2)
+		dmg_tween.tween_property(%Anim, "modulate", Color(1, 1, 1, 1), 0.2)
 		hp -= dmg
 		
 func die():
@@ -19,3 +19,7 @@ func die():
 	teeth.scale = Vector3(5,5,5)
 	get_parent().add_child(teeth)
 	queue_free()
+
+func _process(delta):
+	%Cage.rotation += Vector3(delta,delta,delta)
+	%Cage.rotation += Vector3(delta,delta,delta)

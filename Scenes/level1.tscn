@@ -31,6 +31,9 @@ transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -24, 1, -22)
 [node name="Teeth2" parent="." instance=ExtResource("3_wsoke")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 10, 1, -4)
 
+[node name="Teeth3" parent="." instance=ExtResource("3_wsoke")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 8, 1, -21)
+
 [node name="EndDoor" parent="." instance=ExtResource("6_edsns")]
 transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, 17, 1, 0.9)
 next_level = ExtResource("7_adcup")
@@ -67,17 +70,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 3)
 [node name="Enemy2" parent="enemies" instance=ExtResource("4_2vgdh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, 3)
 
-[node name="Enemy4" parent="enemies" instance=ExtResource("4_2vgdh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -9)
-
-[node name="Enemy5" parent="enemies" instance=ExtResource("4_2vgdh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, -9)
-
 [node name="Enemy3" parent="enemies" instance=ExtResource("4_2vgdh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -21)
-
-[node name="Enemy6" parent="enemies" instance=ExtResource("4_2vgdh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -21)
 
 [node name="Eye" parent="enemies" instance=ExtResource("5_glt61")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -12)
