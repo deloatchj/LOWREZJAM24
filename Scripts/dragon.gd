@@ -55,7 +55,11 @@ func roar():
 	if player:
 		player.set_process(false)
 		player.set_physics_process(false)
-		await get_tree().create_timer(2)
+		await get_tree().create_timer(2).timeout
+		player.set_process(true)
+		player.set_physics_process(true)
+		player = null
+
 
 func full_field_attack():
 	current_state = "full_field"
@@ -87,6 +91,7 @@ func apply_impulse_to_player():
 		player.apply_central_impulse(impulse_direction * impulse_strength)
 
 func crystal_destroyed():
+	roar()
 	crystals_destroyed += 1
 	hp -= 2
 	if crystals_destroyed % 2 == 0:
