@@ -1,76 +1,85 @@
 extends CharacterBody3D
 
-var health = 8
-var speed = 3.0
-var attack_damage = 1
-var push_damage = 1
-var minion_spawn_interval = 20.0
-var push_probability = 0.2  
-var scream_probability = 0.02
+@export var close_range_attack_damage: int = 2
+@export var close_range_attack_distance: float = 2.0
+@onready var player: Node3D = get_tree().get_first_node_in_group("player")
+@export var max_health: int = 8
+var health: int = max_health
+@export var speed: float = 2.0
+@export var rush_speed_multiplier: float = 2.5
+@onready var attack_area: Area3D = $AttackArea
+@onready var state_machine: Node = $StateMachine
+@export var scream_distance: float = 15.0
+@export var scream_slow_duration: float = 1.0
+@export var scream_slow_factor: float = 0.5
+@export var minion_scene: PackedScene
+@export var teeth_scene : PackedScene
+@export var club_scene : PackedScene
+var dead = false
 
-@onready var player = get_tree().get_first_node_in_group("player")
-var freeze_duration = 2.0
-
-@export var orc_scene : PackedScene
-@onready var spawn_timer = $SpawnTimer
-@onready var attack_area = $AttackArea
-@export_color_no_alpha var stun_color
-@onready var markerl = get_parent().get_node("MarkerL")
-@onready var markerr = get_parent().get_node("MarkerR")
-
-func _ready():
+func _ready() -> void:
 	randomize()
+	initialize_state_machine()
 
-func _physics_process(_delta):
-	if player != null:
-		var direction = (player.global_transform.origin - global_transform.origin).normalized()
-		velocity = direction * speed
-		move_and_slide()
+func _physics_process(delta: float) -> void:
+	if not dead:
+		state_machine.process(delta)
 
-		var distance_to_player = global_transform.origin.distance_to(player.global_transform.origin)
-		if distance_to_player <= 2.0:
-			pass
-			#need to add anims here
-			#player.minus_health(attack_damage)
-		elif distance_to_player < 15.0:
-			if randf() > push_probability:
-				scream()
-			else:
-				push_player()
+func initialize_state_machine() -> void:
+	for child in state_machine.get_children():
+		if child is State:
+			child.boss = self
+			child.state_machine = state_machine
 
+	state_machine.start() 
 
-func _on_spawn_timer_timeout():
-		var orc1 = orc_scene.instantiate()
-		orc1.position = markerl.global_position
-		add_child(orc1)
-		var orc2 = orc_scene.instantiate()
-		orc2.position = markerr.global_position
-		add_child(orc2)
-
-func _on_attack_area_body_entered(body):
-	if body.is_in_group("player"):
-		player = body
-
-func _on_attack_area_body_exited(body):
-	if body.is_in_group("player"):
-		player = body
-
-func push_player():
-	if player:
-		var direction = (player.global_transform.origin - global_transform.origin).normalized()
-		direction.y = 0  # Set the y component to zero
-		player.velocity += direction * 500
-
-func take_damage(damage):
+func minus_hp(damage: int) -> void:
+	var teeth: Node3D = teeth_scene.instantiate()
+	teeth.transform.origin.y = 1
+	teeth.scale = Vector3(5,5,5)
+	get_parent().add_child(teeth)
 	health -= damage
 	if health <= 0:
-		queue_free()
+		die()
 
-func scream():
-	%Anim.modulate = stun_color
-	if player != null:
-		player.speed = 3
-		player.sprint_speed = 7
-		await get_tree().create_timer(2).timeout
-		player.speed = 5
-		player.sprint_speed = 10
+func attack_player() -> void:
+	if player:
+		var distance_to_player: float = global_transform.origin.distance_to(player.global_transform.origin)
+		if distance_to_player <= close_range_attack_distance:
+			player.minus_health(close_range_attack_damage)
+
+func perform_scream() -> void:
+	if player:
+		var distance_to_player: float = global_transform.origin.distance_to(player.global_transform.origin)
+		if distance_to_player >= scream_distance:
+			slow_down_player()
+			spawn_minions()
+
+func slow_down_player() -> void:
+	if player:
+		player.speed *= scream_slow_factor
+		await get_tree().create_timer(scream_slow_duration).timeout
+		player.speed /= scream_slow_factor
+
+func spawn_minions() -> void:
+	var minion: Node3D = minion_scene.instantiate()
+	$Marker3D.add_child(minion)
+	$Marker3D2.add_child(minion)
+
+func die():
+	dead = true
+	%Diesfx.play()
+	%Anim.play("die")
+	$CollisionShape3D.disabled = true
+	var teeth = teeth_scene.instantiate()
+	teeth.global_transform = global_transform
+	teeth.transform.origin.y = 1.1
+	teeth.scale = Vector3(5,5,5)
+	get_parent().add_child(teeth)
+	var club = club_scene.instantiate()
+	club.global_transform = global_transform
+	club.transform.origin.y = 1.1
+	club.scale = Vector3(5,5,5)
+	get_parent().add_child(club)
+	get_parent().orclord_defeated = true
+	

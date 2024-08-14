@@ -10,10 +10,11 @@ config_version=5
 
 [application]
 
-config/name="LOWREZJAM24"
+config/name="Tooth and Nail"
 run/main_scene="res://Scenes/MainMenu.tscn"
 config/features=PackedStringArray("4.2")
-config/icon="res://icon.svg"
+config/icon="res://TnNicon.png"
+config/windows_native_icon="res://TnNicon.ico"
 
 [autoload]
 

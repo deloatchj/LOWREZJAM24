@@ -36,8 +36,7 @@ func die():
 	%DieSFX.play()
 	dead = true
 	%Anim.play("die")
-	$Area3D/CollisionShape3D.disabled = true
-	$CollisionShape3D.disabled = true
+	call_deferred("disable_collision_shapes")
 	var teeth = teeth_sn.instantiate()
 	teeth.global_transform = global_transform
 	teeth.transform.origin.y = 1.1
@@ -51,3 +50,9 @@ func _on_area_3d_body_entered(body):
 
 func minus_hp(dmg):
 		die()
+
+func disable_collision_shapes():
+	if $Area3D/CollisionShape3D:
+		$Area3D/CollisionShape3D.disabled = true
+	if $CollisionShape3D:
+		$CollisionShape3D.disabled = true

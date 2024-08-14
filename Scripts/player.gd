@@ -26,13 +26,13 @@ func _ready():
 		%Hand.play("idle_ar")
 
 func _physics_process(delta):
+	%Spiral.rotation += delta
 	if 1 in Game.keys:
 		%Key1.visible = true
 		%Key1.modulate = Color.RED
 	if 2 in Game.keys:
 		%Key2.visible = true
 		%Key2.modulate = Color.YELLOW
-	%Spiral.rotation += delta
 	match Game.player_hp:
 		8:
 			teeth.frame = 0
@@ -73,7 +73,7 @@ func _physics_process(delta):
 	
 	if Input.is_action_pressed("shoot"):
 		_shoot()
-	if Input.is_action_just_pressed("melee"):
+	if Input.is_action_just_pressed("melee") and Game.melee_unlocked:
 		if meleemode:
 			current_gun_mode = prev_gun_mode
 			match current_gun_mode:
@@ -110,7 +110,7 @@ func _shoot():
 				can_shoot = false
 				%Hand.play("shoot_r")
 				%RShootsfx.play()
-				%Shotgunfx.emitting = true
+				%Revolverfx.emitting = true
 				if %Ray.is_colliding() and %Ray.get_collider().has_method("die"):
 					%Ray.get_collider().minus_hp(1)
 				Game.player_hp -= 1
@@ -128,14 +128,15 @@ func _shoot():
 				can_shoot = false
 				%Hand.play("shoot_ar")
 				%AShootsfx.play()
-				%Shotgunfx.emitting = true
+				%Minigunfx.emitting = true
 				if %Ray.is_colliding() and %Ray.get_collider().has_method("die"):
 					%Ray.get_collider().minus_hp(2)
 				Game.player_hp -= 1
 				await get_tree().create_timer(0.1).timeout
 				can_shoot = true
 		GunMode.MELEE:
-			_melee_attack()
+			if Game.melee_unlocked:
+				_melee_attack()
 
 func _melee_attack():
 		if !can_shoot:

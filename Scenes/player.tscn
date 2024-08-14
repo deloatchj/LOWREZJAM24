@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://cbvitixxqntop"]
+[gd_scene load_steps=42 format=3 uid="uid://cbvitixxqntop"]
 
 [ext_resource type="Texture2D" uid="uid://d2fq3klu2ilat" path="res://Sprites/gun-placeholder.png" id="1_3iqld"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_g37v8"]
@@ -8,9 +8,19 @@
 [ext_resource type="Texture2D" uid="uid://brdj6wlxgxy1v" path="res://Sprites/hpsheet_placeholder.png" id="4_tqp76"]
 [ext_resource type="Texture2D" uid="uid://by1fiftoo0qee" path="res://Sprites/shotgun-particles-placeholder.png" id="5_n3hn7"]
 [ext_resource type="Texture2D" uid="uid://dsbeyyxhct08r" path="res://Sprites/key-placeholder.png" id="6_unyrf"]
-[ext_resource type="Texture2D" uid="uid://wbhnq0num06m" path="res://Sprites/background-spiral.png" id="8_27q1b"]
+[ext_resource type="Texture2D" uid="uid://cbepdaogyx4xk" path="res://Sprites/death-screen-spiral.png" id="8_3srp3"]
 [ext_resource type="Theme" uid="uid://cm7qo2dxea7cn" path="res://Resources/Theme.tres" id="9_05ksp"]
 [ext_resource type="FontFile" uid="uid://xy3t00miaccy" path="res://Fonts/Abaddon Bold.ttf" id="10_oe7xp"]
+[ext_resource type="AudioStream" uid="uid://bpajhrm2jayq6" path="res://Sounds/revolvershoot.ogg" id="12_mfyte"]
+[ext_resource type="AudioStream" uid="uid://bgoqcbt5akwfm" path="res://Sounds/bone-break-1-218512.mp3" id="12_qj70r"]
+[ext_resource type="AudioStream" uid="uid://be4f1k13hdtmd" path="res://Sounds/melee1.ogg" id="12_tcfx8"]
+[ext_resource type="AudioStream" uid="uid://c4jrlm7dg35gy" path="res://Sounds/bone-break-5-218513.mp3" id="13_1e0hb"]
+[ext_resource type="AudioStream" uid="uid://dqkfq62yjxfvd" path="res://Sounds/melee2.ogg" id="13_4gmnp"]
+[ext_resource type="AudioStream" uid="uid://c5s7jhtljivsq" path="res://Sounds/shotgunshoot.ogg" id="13_684ut"]
+[ext_resource type="AudioStream" uid="uid://bd85flljp23ug" path="res://Sounds/bone-break-6-218517.mp3" id="14_1a4xx"]
+[ext_resource type="AudioStream" uid="uid://dfe3md56heoss" path="res://Sounds/minigunshoot.ogg" id="14_c51r8"]
+[ext_resource type="AudioStream" uid="uid://celhehwehun15" path="res://Sounds/melee3.ogg" id="14_k0wrf"]
+[ext_resource type="AudioStream" uid="uid://csrl8w5pcf0tp" path="res://Sounds/bone-break-8-218516.mp3" id="15_8f1bo"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gavwr"]
 height = 1.73956
@@ -161,6 +171,26 @@ animations = [{
 [sub_resource type="BoxShape3D" id="BoxShape3D_fyup5"]
 size = Vector3(2, 2, 2)
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_s4jv6"]
+streams_count = 4
+stream_0/stream = ExtResource("12_qj70r")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("13_1e0hb")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("14_1a4xx")
+stream_2/weight = 1.0
+stream_3/stream = ExtResource("15_8f1bo")
+stream_3/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_y8afa"]
+streams_count = 3
+stream_0/stream = ExtResource("12_tcfx8")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("13_4gmnp")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("14_k0wrf")
+stream_2/weight = 1.0
+
 [node name="Player" type="CharacterBody3D" groups=["player"]]
 collision_layer = 3
 collision_mask = 3
@@ -187,6 +217,7 @@ spot_angle = 11.0771
 [node name="Ray" type="RayCast3D" parent="Camera3D"]
 unique_name_in_owner = true
 target_position = Vector3(0, 0, -100)
+collision_mask = 3
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
@@ -208,9 +239,8 @@ grow_vertical = 2
 unique_name_in_owner = true
 position = Vector2(32, 32)
 sprite_frames = SubResource("SpriteFrames_olwvt")
-animation = &"melee"
+animation = &"shoot_ar"
 autoplay = "idle_r"
-frame_progress = 0.843518
 
 [node name="Teeth" type="Sprite2D" parent="CanvasLayer/Control"]
 unique_name_in_owner = true
@@ -275,7 +305,7 @@ offset_bottom = -17.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(20, 20)
-texture = ExtResource("8_27q1b")
+texture = ExtResource("8_3srp3")
 
 [node name="Control" type="Control" parent="CanvasLayer/Death"]
 layout_mode = 1
@@ -294,7 +324,7 @@ offset_top = 11.0
 offset_bottom = -35.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(0.541176, 0, 0, 1)
+theme_override_colors/font_color = Color(0.396078, 0, 0, 1)
 theme_override_fonts/font = ExtResource("10_oe7xp")
 text = "SED NON"
 horizontal_alignment = 1
@@ -363,6 +393,46 @@ local_coords = true
 texture = ExtResource("5_n3hn7")
 gravity = Vector2(0, 0)
 angle_max = 15.0
+
+[node name="Revolverfx" type="CPUParticles2D" parent="CanvasLayer"]
+unique_name_in_owner = true
+z_index = -1
+z_as_relative = false
+texture_filter = 1
+position = Vector2(32, 36)
+emitting = false
+amount = 1
+lifetime = 0.1
+one_shot = true
+local_coords = true
+texture = ExtResource("5_n3hn7")
+gravity = Vector2(0, 0)
+angle_max = 15.0
+scale_amount_min = 0.5
+scale_amount_max = 0.5
+color = Color(1, 0.54902, 0, 1)
+
+[node name="Minigunfx" type="CPUParticles2D" parent="CanvasLayer"]
+unique_name_in_owner = true
+z_index = -1
+z_as_relative = false
+texture_filter = 1
+position = Vector2(32, 32)
+emitting = false
+amount = 3
+lifetime = 0.1
+one_shot = true
+explosiveness = 1.0
+local_coords = true
+texture = ExtResource("5_n3hn7")
+emission_shape = 4
+emission_points = PackedVector2Array(0, 0, -4, 0, 4, 0)
+emission_colors = PackedColorArray()
+gravity = Vector2(0, 0)
+angle_max = 15.0
+scale_amount_min = 0.4
+scale_amount_max = 0.4
+color = Color(0.490196, 1, 0, 1)
 
 [node name="Pause" type="Control" parent="CanvasLayer"]
 unique_name_in_owner = true
@@ -450,18 +520,29 @@ shape = SubResource("BoxShape3D_fyup5")
 
 [node name="Hurtsfx" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_s4jv6")
+bus = &"SFX"
 
 [node name="Meleesfx" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_y8afa")
+bus = &"SFX"
 
 [node name="RShootsfx" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
+stream = ExtResource("12_mfyte")
+volume_db = -15.0
+bus = &"SFX"
 
 [node name="ShShootsfx" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
+stream = ExtResource("13_684ut")
+bus = &"SFX"
 
 [node name="AShootsfx" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
+stream = ExtResource("14_c51r8")
+bus = &"SFX"
 
 [connection signal="pressed" from="CanvasLayer/Death/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Death/RetryButton" to="." method="_on_retry_button_pressed"]

@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://cvj3t1g5xfu30"]
+[gd_scene load_steps=13 format=3 uid="uid://cvj3t1g5xfu30"]
 
 [ext_resource type="MeshLibrary" uid="uid://ckfuxrw1vgfbw" path="res://Resources/Tiles.meshlib" id="1_4yp7j"]
+[ext_resource type="Script" path="res://Scripts/level3.gd" id="1_35ifu"]
 [ext_resource type="PackedScene" uid="uid://cbvitixxqntop" path="res://Scenes/player.tscn" id="2_4weip"]
 [ext_resource type="PackedScene" uid="uid://7vjd03vpl4y6" path="res://Scenes/teeth.tscn" id="3_3wvgq"]
 [ext_resource type="PackedScene" uid="uid://c84v8emwefa5q" path="res://Scenes/end_door.tscn" id="4_sopr3"]
@@ -9,8 +10,11 @@
 [ext_resource type="PackedScene" uid="uid://de1h3nl1nee28" path="res://Scenes/key.tscn" id="6_storj"]
 [ext_resource type="PackedScene" uid="uid://c553o0wiu186i" path="res://Scenes/mimic.tscn" id="7_p8jmc"]
 [ext_resource type="PackedScene" uid="uid://bt0xvs2gldik2" path="res://Scenes/kill_area.tscn" id="9_8a82e"]
+[ext_resource type="AudioStream" uid="uid://b7qew6oeqs4fv" path="res://Sounds/drone.mp3" id="10_8heew"]
+[ext_resource type="FontFile" uid="uid://xy3t00miaccy" path="res://Fonts/Abaddon Bold.ttf" id="11_odxmk"]
 
 [node name="Level3" type="Node3D"]
+script = ExtResource("1_35ifu")
 
 [node name="GridMap" type="GridMap" parent="."]
 mesh_library = ExtResource("1_4yp7j")
@@ -92,9 +96,45 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
 [node name="LevelMusic" type="Node" parent="."]
 
 [node name="LevelDrone" type="AudioStreamPlayer" parent="LevelMusic"]
+stream = ExtResource("10_8heew")
+autoplay = true
 
 [node name="LevelDrums" type="AudioStreamPlayer" parent="LevelMusic"]
 bus = &"Drums"
 
 [node name="LevelInstruments" type="AudioStreamPlayer" parent="LevelMusic"]
 bus = &"Instruments"
+
+[node name="NEWunlock" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="NEWunlock"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 64.0
+offset_bottom = 64.0
+
+[node name="ColorRect" type="ColorRect" parent="NEWunlock/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.721569)
+
+[node name="Label2" type="Label" parent="NEWunlock/Control"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = 2.0
+offset_right = 1.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("11_odxmk")
+text = "PRESS 'E'
+TO USE
+THE CLUB"
