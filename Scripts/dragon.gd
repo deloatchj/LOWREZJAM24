@@ -10,7 +10,7 @@ extends CharacterBody3D
 @export var patrol_speed = 0.5 
 @export var nail_scene : PackedScene
 var state_timer = null
-var state_duration = 5.0  
+var state_duration = 5.0
 var current_state = "patrol"
 var can_damage = false
 var hp = 20
@@ -92,13 +92,12 @@ func nudge_player():
 		await get_tree().create_timer(duration).timeout
 		apply_impulse_to_player()
 		await get_tree().create_timer(1.0).timeout
-		current_state = "focus"
 
 func apply_impulse_to_player():
 	if player != null:
-		var impulse_direction = (player.global_transform.origin - global_transform.origin).normalized()
-		var impulse_strength = 10.0
-		player.apply_central_impulse(impulse_direction * impulse_strength)
+		var impulse_direction = Vector3(0.5, 0.5, 0).normalized()
+		var impulse_strength = 2.0
+		player.velocity += impulse_direction * impulse_strength
 
 func crystal_destroyed():
 	roar()
