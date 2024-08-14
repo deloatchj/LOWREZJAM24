@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://coujk0qruee52"]
+[gd_scene load_steps=23 format=3 uid="uid://coujk0qruee52"]
 
 [ext_resource type="Script" path="res://Scripts/Spitter.gd" id="1_047sl"]
 [ext_resource type="PackedScene" uid="uid://cfhmf3fb26sw" path="res://Scenes/nail.tscn" id="2_a75vw"]
@@ -9,6 +9,8 @@
 [ext_resource type="Script" path="res://Resources/chase_state.gd" id="5_66xb4"]
 [ext_resource type="Texture2D" uid="uid://b0r50qdt336h2" path="res://Sprites/spitter-placeholder-export.png" id="5_hnvmq"]
 [ext_resource type="Script" path="res://Resources/spin_state.gd" id="7_kkkrb"]
+[ext_resource type="AudioStream" uid="uid://c5f44mkho5r0v" path="res://Sounds/weepermimicdieatk.ogg" id="10_5t3ln"]
+[ext_resource type="AudioStream" uid="uid://c2smm41e6ucuk" path="res://Sounds/orc-die.ogg" id="11_kid6d"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3eoxx"]
 height = 1.9
@@ -148,10 +150,13 @@ script = ExtResource("7_kkkrb")
 
 [node name="Hurtsfx" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
+stream = ExtResource("10_5t3ln")
 bus = &"SFX"
 
 [node name="Diesfx" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
+stream = ExtResource("11_kid6d")
+pitch_scale = 4.0
 bus = &"SFX"
 
 [connection signal="timeout" from="StateMachine/Idle/Timer" to="StateMachine/Idle" method="_on_Timer_timeout"]

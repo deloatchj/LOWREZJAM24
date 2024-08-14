@@ -110,7 +110,7 @@ func _shoot():
 				can_shoot = false
 				%Hand.play("shoot_r")
 				%RShootsfx.play()
-				%Shotgunfx.emitting = true
+				%Revolverfx.emitting = true
 				if %Ray.is_colliding() and %Ray.get_collider().has_method("die"):
 					%Ray.get_collider().minus_hp(1)
 				Game.player_hp -= 1
@@ -128,7 +128,7 @@ func _shoot():
 				can_shoot = false
 				%Hand.play("shoot_ar")
 				%AShootsfx.play()
-				%Shotgunfx.emitting = true
+				%Minigunfx.emitting = true
 				if %Ray.is_colliding() and %Ray.get_collider().has_method("die"):
 					%Ray.get_collider().minus_hp(2)
 				Game.player_hp -= 1

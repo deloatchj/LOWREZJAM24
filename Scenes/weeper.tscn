@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://3yjy14an13r7"]
+[gd_scene load_steps=11 format=3 uid="uid://3yjy14an13r7"]
 
 [ext_resource type="Script" path="res://Scripts/weeper.gd" id="1_2mlk0"]
 [ext_resource type="Texture2D" uid="uid://c6ksmlvajt8s" path="res://Sprites/weeper-placeholder.png" id="1_84nsv"]
 [ext_resource type="PackedScene" uid="uid://7vjd03vpl4y6" path="res://Scenes/teeth.tscn" id="2_vdgkb"]
+[ext_resource type="AudioStream" uid="uid://c5f44mkho5r0v" path="res://Sounds/weepermimicdieatk.ogg" id="4_261ih"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_46cbt"]
 height = 1.55145
@@ -73,6 +74,7 @@ shape = SubResource("BoxShape3D_gordf")
 
 [node name="DieSFX" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
+stream = ExtResource("4_261ih")
 bus = &"SFX"
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

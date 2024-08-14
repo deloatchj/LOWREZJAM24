@@ -73,6 +73,7 @@ next_level = ExtResource("5_em68d")
 
 [node name="LevelDrone" type="AudioStreamPlayer" parent="LevelMusic"]
 stream = ExtResource("7_d0dsu")
+autoplay = true
 
 [node name="LevelDrums" type="AudioStreamPlayer" parent="LevelMusic"]
 bus = &"Drums"

@@ -1,9 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://c553o0wiu186i"]
+[gd_scene load_steps=14 format=3 uid="uid://c553o0wiu186i"]
 
 [ext_resource type="Script" path="res://Scripts/Mimic.gd" id="1_rokfr"]
 [ext_resource type="PackedScene" uid="uid://7vjd03vpl4y6" path="res://Scenes/teeth.tscn" id="2_y6bvx"]
 [ext_resource type="PackedScene" uid="uid://cfhmf3fb26sw" path="res://Scenes/nail.tscn" id="3_yifb5"]
 [ext_resource type="Texture2D" uid="uid://bdu6ltwu4f5q" path="res://Sprites/mimic-placeholder.png" id="4_gk0jl"]
+[ext_resource type="AudioStream" uid="uid://c5f44mkho5r0v" path="res://Sounds/weepermimicdieatk.ogg" id="5_xc8a7"]
+[ext_resource type="AudioStream" uid="uid://cg7x082i6c50n" path="res://Sounds/eyeatk.ogg" id="6_gm6j8"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7dmdu"]
 height = 1.9
@@ -87,14 +89,17 @@ autostart = true
 
 [node name="Hurtsfx" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
+stream = ExtResource("5_xc8a7")
 bus = &"SFX"
 
 [node name="Diesfx" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
+stream = ExtResource("5_xc8a7")
 bus = &"SFX"
 
 [node name="Shootsfx" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
+stream = ExtResource("6_gm6j8")
 bus = &"SFX"
 
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cerba0xkxw3na"]
+[gd_scene load_steps=21 format=3 uid="uid://cerba0xkxw3na"]
 
 [ext_resource type="Script" path="res://Scripts/BossOrcLord.gd" id="1_nqe3m"]
 [ext_resource type="PackedScene" uid="uid://d3mqexrp1ayx7" path="res://Scenes/Orc.tscn" id="2_i27i6"]
@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://djxplj21hpowh" path="res://Scenes/club.tscn" id="4_tgmr5"]
 [ext_resource type="Script" path="res://Resources/orc_idle.gd" id="4_tlb8k"]
 [ext_resource type="Script" path="res://Resources/OrcScream.gd" id="5_elvl0"]
+[ext_resource type="AudioStream" uid="uid://el74bfokj4x0" path="res://Sounds/orc-hurt.ogg" id="11_r2ojr"]
+[ext_resource type="AudioStream" uid="uid://c2smm41e6ucuk" path="res://Sounds/orc-die.ogg" id="12_4s7eo"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fcjjq"]
 height = 1.89593
@@ -121,10 +123,12 @@ script = ExtResource("4_tlb8k")
 
 [node name="Hurtsfx" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
+stream = ExtResource("11_r2ojr")
 bus = &"SFX"
 
 [node name="Diesfx" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
+stream = ExtResource("12_4s7eo")
 bus = &"SFX"
 
 [connection signal="body_entered" from="AttackArea" to="." method="_on_area_3d_body_entered"]

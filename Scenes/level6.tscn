@@ -212,6 +212,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 0)
 
 [node name="LevelDrone" type="AudioStreamPlayer" parent="LevelMusic"]
 stream = ExtResource("15_7emig")
+autoplay = true
 
 [node name="LevelDrums" type="AudioStreamPlayer" parent="LevelMusic"]
 bus = &"Drums"
