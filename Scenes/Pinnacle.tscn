@@ -125,3 +125,6 @@ ritualmode = 2
 
 [node name="Dragon" parent="." instance=ExtResource("9_jqiyv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11, -14)
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, -13)

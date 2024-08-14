@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://qiwc2gvk20s"]
+[gd_scene load_steps=11 format=3 uid="uid://qiwc2gvk20s"]
 
 [ext_resource type="Script" path="res://Scripts/dragon.gd" id="1_6lr3h"]
 [ext_resource type="Texture2D" uid="uid://dvpb1tvakyji2" path="res://Sprites/dragon.png" id="1_kbu0p"]
 [ext_resource type="PackedScene" uid="uid://7vjd03vpl4y6" path="res://Scenes/teeth.tscn" id="2_1nvtt"]
 [ext_resource type="AudioStream" uid="uid://el74bfokj4x0" path="res://Sounds/orc-hurt.ogg" id="3_bpq8v"]
 [ext_resource type="AudioStream" uid="uid://c2smm41e6ucuk" path="res://Sounds/orc-die.ogg" id="4_dwe7w"]
+[ext_resource type="AudioStream" uid="uid://cg7x082i6c50n" path="res://Sounds/eyeatk.ogg" id="6_341pc"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_nw1q7"]
 radius = 1.0
@@ -24,6 +25,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_0yeqx"]
+size = Vector3(1, 0.001, 1)
+
 [node name="Dragon" type="CharacterBody3D" groups=["boss"]]
 script = ExtResource("1_6lr3h")
 teeth_scene = ExtResource("2_1nvtt")
@@ -35,7 +39,7 @@ shape = SubResource("CapsuleShape3D_nw1q7")
 [node name="Anim" type="AnimatedSprite3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 1.31802, 0)
-billboard = 2
+billboard = 1
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_gvjx3")
 autoplay = "default"
@@ -49,3 +53,13 @@ bus = &"SFX"
 unique_name_in_owner = true
 stream = ExtResource("4_dwe7w")
 bus = &"SFX"
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.000499994, 0)
+shape = SubResource("BoxShape3D_0yeqx")
+
+[node name="Roar" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("6_341pc")
