@@ -22,7 +22,7 @@ func _on_area_3d_body_entered(body):
 		%Anim.modulate = stun_color
 		player.set_process(false)
 		player.set_physics_process(false)
-		Game.player_hp -= 2
+		player.minus_health(2)
 		%StunSound.play()
 		$ImmobileTimer.start(2)
 

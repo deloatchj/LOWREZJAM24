@@ -239,7 +239,7 @@ grow_vertical = 2
 unique_name_in_owner = true
 position = Vector2(32, 32)
 sprite_frames = SubResource("SpriteFrames_olwvt")
-animation = &"shoot_ar"
+animation = &"idle_sh"
 autoplay = "idle_r"
 
 [node name="Teeth" type="Sprite2D" parent="CanvasLayer/Control"]

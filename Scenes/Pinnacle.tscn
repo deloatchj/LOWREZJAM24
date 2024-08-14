@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bsjtkgvulgugs"]
+[gd_scene load_steps=13 format=3 uid="uid://bsjtkgvulgugs"]
 
 [ext_resource type="MeshLibrary" uid="uid://ckfuxrw1vgfbw" path="res://Resources/Tiles.meshlib" id="1_1ok72"]
 [ext_resource type="PackedScene" uid="uid://cbvitixxqntop" path="res://Scenes/player.tscn" id="2_04yjj"]
@@ -8,6 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://b7qew6oeqs4fv" path="res://Sounds/drone.mp3" id="6_hookd"]
 [ext_resource type="PackedScene" uid="uid://07po3gum48ui" path="res://Scenes/crystal.tscn" id="7_ayhko"]
 [ext_resource type="PackedScene" uid="uid://c5aqhxkrlwxuh" path="res://Scenes/ritual.tscn" id="8_m0agu"]
+[ext_resource type="PackedScene" uid="uid://qiwc2gvk20s" path="res://Scenes/dragon.tscn" id="9_jqiyv"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_3fmln"]
 panorama = ExtResource("4_us5g4")
@@ -98,24 +99,29 @@ transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 12, 3, -28)
 [node name="Crystal6" parent="Crystals" instance=ExtResource("7_ayhko")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -12, 3, -28)
 
-[node name="Ritual" parent="." instance=ExtResource("8_m0agu")]
+[node name="Rituals" type="Node3D" parent="."]
+
+[node name="Ritual" parent="Rituals" instance=ExtResource("8_m0agu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, -5)
 
-[node name="Ritual2" parent="." instance=ExtResource("8_m0agu")]
+[node name="Ritual2" parent="Rituals" instance=ExtResource("8_m0agu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.05, -5)
 ritualmode = 1
 
-[node name="Ritual3" parent="." instance=ExtResource("8_m0agu")]
+[node name="Ritual3" parent="Rituals" instance=ExtResource("8_m0agu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.05, -5)
 ritualmode = 2
 
-[node name="Ritual4" parent="." instance=ExtResource("8_m0agu")]
+[node name="Ritual4" parent="Rituals" instance=ExtResource("8_m0agu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.05, -21)
 ritualmode = 1
 
-[node name="Ritual5" parent="." instance=ExtResource("8_m0agu")]
+[node name="Ritual5" parent="Rituals" instance=ExtResource("8_m0agu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, -21)
 
-[node name="Ritual6" parent="." instance=ExtResource("8_m0agu")]
+[node name="Ritual6" parent="Rituals" instance=ExtResource("8_m0agu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.05, -21)
 ritualmode = 2
+
+[node name="Dragon" parent="." instance=ExtResource("9_jqiyv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11, -14)
