@@ -116,23 +116,11 @@ next_level = ExtResource("7_mym5m")
 [node name="Orc" parent="Enemies" instance=ExtResource("8_ubhlf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -15)
 
-[node name="Orc5" parent="Enemies" instance=ExtResource("8_ubhlf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -68)
-
-[node name="Orc6" parent="Enemies" instance=ExtResource("8_ubhlf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, -68)
-
 [node name="Orc7" parent="Enemies" instance=ExtResource("8_ubhlf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -68)
 
-[node name="Orc3" parent="Enemies" instance=ExtResource("8_ubhlf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -40)
-
-[node name="Orc4" parent="Enemies" instance=ExtResource("8_ubhlf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -32)
-
 [node name="Orc2" parent="Enemies" instance=ExtResource("8_ubhlf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -15)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -42)
 
 [node name="Eye" parent="Enemies" instance=ExtResource("9_tamob")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -7)
@@ -164,14 +152,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -18)
 [node name="Weeper5" parent="Enemies" instance=ExtResource("11_crabv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -61)
 
-[node name="Weeper6" parent="Enemies" instance=ExtResource("11_crabv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -61)
-
 [node name="Weeper7" parent="Enemies" instance=ExtResource("11_crabv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -61)
-
-[node name="Weeper8" parent="Enemies" instance=ExtResource("11_crabv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -61)
 
 [node name="Weeper2" parent="Enemies" instance=ExtResource("11_crabv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, -18)
@@ -187,12 +169,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -52)
 
 [node name="Mimic2" parent="Enemies" instance=ExtResource("12_knkra")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -52)
-
-[node name="Mimic3" parent="Enemies" instance=ExtResource("12_knkra")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, -52)
-
-[node name="Mimic4" parent="Enemies" instance=ExtResource("12_knkra")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -52)
 
 [node name="Mimic5" parent="Enemies" instance=ExtResource("12_knkra")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -70)

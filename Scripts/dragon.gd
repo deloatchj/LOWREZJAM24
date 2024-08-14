@@ -9,18 +9,26 @@ extends CharacterBody3D
 @export var patrol_center = Vector3(0, 6, -13)
 @export var patrol_speed = 0.5 
 @export var nail_scene : PackedScene
-
+var state_timer = null
+var state_duration = 5.0  
 var current_state = "patrol"
 var can_damage = false
 var hp = 20
 var player = null
 var patrol_angle = 0.0 
 var dead = false
+@onready var muzzle = %Muzzle
 
 func _ready():
-	position = patrol_center + Vector3(0, 0, -patrol_radius) 
+	position = patrol_center + Vector3(0, 0, -patrol_radius)
 	set_physics_process(false)
 	patrol()
+	state_timer = Timer.new()
+	state_timer.timeout.connect(self._on_state_timer_timeout)
+	state_timer.set_wait_time(state_duration)
+	state_timer.set_one_shot(false)
+	add_child(state_timer)
+	state_timer.start()
 	
 func _process(delta):
 	match current_state:
@@ -46,8 +54,6 @@ func patrol_movement(delta):
 	var x = patrol_center.x + patrol_radius * sin(patrol_angle)
 	var z = patrol_center.z + patrol_radius * cos(patrol_angle)
 	position = Vector3(x, patrol_center.y, z)
-	if int(patrol_angle) % int(TAU) == 0:
-		%Hurtsfx.play()
 
 func roar():
 	%Roar.play()
@@ -67,7 +73,11 @@ func full_field_attack():
 
 func focus_attack():
 	current_state = "focus"
-	pass
+	var player = get_tree().get_first_node_in_group("player")
+	var nail = nail_scene.instantiate()
+	nail.direction = (player.global_transform.origin - global_transform.origin).normalized()
+	get_parent().add_child(nail)
+	nail.global_position = muzzle.global_position
 
 func nudge_player():
 	if player != null:
@@ -121,6 +131,7 @@ func drop_teeth():
 
 func die():
 	if not dead:
+		%Anim.play("die")
 		dead = true
 		current_state = "dead"
 		collision_layer = 0
@@ -148,3 +159,21 @@ func interpolate_to(target_position: Vector3, duration: float, trans_type: int, 
 	tween.set_ease(ease_type)
 	tween.tween_property(self, "global_transform:origin", target_position, duration)
 	tween.play()
+
+func change_state(new_state):
+	current_state = new_state
+	match current_state:
+		"patrol":
+			patrol()
+		"full_field":
+			full_field_attack()
+		"focus":
+			focus_attack()
+		"nudge":
+			nudge_player()
+
+func _on_state_timer_timeout():
+	if not dead:
+		var states = ["patrol", "full_field", "focus", "nudge"]
+		var random_state = states[randi() % states.size()]
+		change_state(random_state)

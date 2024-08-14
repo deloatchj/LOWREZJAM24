@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cfhmf3fb26sw" path="res://Scenes/nail.tscn" id="3_2i1fd"]
 [ext_resource type="AudioStream" uid="uid://el74bfokj4x0" path="res://Sounds/orc-hurt.ogg" id="3_bpq8v"]
 [ext_resource type="AudioStream" uid="uid://c2smm41e6ucuk" path="res://Sounds/orc-die.ogg" id="4_dwe7w"]
-[ext_resource type="AudioStream" uid="uid://cg7x082i6c50n" path="res://Sounds/eyeatk.ogg" id="6_341pc"]
+[ext_resource type="Texture2D" uid="uid://bld002kdw3b04" path="res://Sprites/dragon-dead.png" id="5_25xdd"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_nw1q7"]
 radius = 1.0
@@ -23,6 +23,14 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_25xdd")
+}],
+"loop": true,
+"name": &"die",
 "speed": 5.0
 }]
 
@@ -41,6 +49,7 @@ transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 1, 0)
 billboard = 1
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_gvjx3")
+animation = &"die"
 autoplay = "default"
 
 [node name="Hurtsfx" type="AudioStreamPlayer" parent="."]
@@ -55,7 +64,9 @@ bus = &"SFX"
 
 [node name="Roar" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("6_341pc")
+stream = ExtResource("4_dwe7w")
+volume_db = 10.0
 
-[node name="Marker3D" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1.4)
+[node name="Muzzle" type="Marker3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1.6)
