@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://dyimv8qc5yvvn"]
+
+[ext_resource type="Texture2D" uid="uid://c3etjkr584ufi" path="res://Sprites/crystal.png" id="1_wcnka"]
+[ext_resource type="PackedScene" uid="uid://7vjd03vpl4y6" path="res://Scenes/teeth.tscn" id="2_bp00k"]
+[ext_resource type="Script" path="res://Scripts/crystal.gd" id="2_krlh5"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_slun8"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cq6hu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_wcnka")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[node name="Crystal" type="CharacterBody3D" groups=["crystal"]]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 1, 0)
+script = ExtResource("2_krlh5")
+teeth_sn = ExtResource("2_bp00k")
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.944, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0.944, 0)
+shape = SubResource("BoxShape3D_slun8")
+
+[node name="Anim" type="AnimatedSprite3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0.944251, 0)
+billboard = 2
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_cq6hu")
+animation = &"walk"
+autoplay = "walk"
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
